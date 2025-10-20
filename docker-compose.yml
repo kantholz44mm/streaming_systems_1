@@ -1,20 +1,49 @@
 
+
 services:
+  # ----------------------------------------
+  # Apache ActiveMQ Artemis
+  # ----------------------------------------
   activemq:
     image: apache/activemq-artemis:latest
     container_name: activemq-artemis
     restart: unless-stopped
     ports:
-      - "8161:8161"   # Web Console
-      - "61616:61616" # JMS (Core, OpenWire, AMQP)
-      - "5672:5672"   # AMQP (optional)
-      - "1883:1883"   # MQTT (optional)
-      - "61613:61613" # STOMP (optional)
+      - "8161:8161"    # Web Console
+      - "61616:61616"  # JMS (Core/OpenWire)
+      - "5672:5672"    # AMQP
+      - "1883:1883"    # MQTT
+      - "61613:61613"  # STOMP
     environment:
       - ARTEMIS_USER=admin
       - ARTEMIS_PASSWORD=admin
-    volumes:
-      - artemis-data:/var/lib/artemis-instance
+    networks:
+      app-net:
+        aliases: [activemq, artemis]
 
-volumes:
-  artemis-data:
+  # ----------------------------------------
+  # Apache Kafka 
+  # ----------------------------------------
+  kafka:
+    image: apache/kafka:4.0.1
+    container_name: kafka
+    restart: unless-stopped
+    ports:
+      - "9094:9094"    # External access
+    #environment:
+    #  - KAFKA_NODE_ID=1
+    #  - KAFKA_PROCESS_ROLES=broker,controller
+    #  - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093,EXTERNAL://0.0.0.0:9094
+    #  - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+    #  - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
+    #  - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    #  - KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:29093
+    #  - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    networks:
+      app-net:
+        aliases: [kafka, broker]
+
+networks:
+  app-net:
+    name: messaging-net
+    driver: bridge
