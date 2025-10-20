@@ -1,0 +1,20 @@
+
+services:
+  activemq:
+    image: apache/activemq-artemis:latest
+    container_name: activemq-artemis
+    restart: unless-stopped
+    ports:
+      - "8161:8161"   # Web Console
+      - "61616:61616" # JMS (Core, OpenWire, AMQP)
+      - "5672:5672"   # AMQP (optional)
+      - "1883:1883"   # MQTT (optional)
+      - "61613:61613" # STOMP (optional)
+    environment:
+      - ARTEMIS_USER=admin
+      - ARTEMIS_PASSWORD=admin
+    volumes:
+      - artemis-data:/var/lib/artemis-instance
+
+volumes:
+  artemis-data:
