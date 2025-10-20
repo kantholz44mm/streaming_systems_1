@@ -58,6 +58,15 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.13.0</version>
+          <configuration>
+            <excludes>
+              <exclude>com/krassedudes/ss/Listener.java</exclude>
+              <exclude>com/krassedudes/ss/MyBrokerService.java</exclude>
+              <exclude>com/krassedudes/ss/TimestampConsumer.java</exclude>
+              <exclude>com/krassedudes/ss/TimestampPublisher.java</exclude>
+              <exclude>com/krassedudes/ss/WindowInfos.java</exclude>
+            </excludes>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
