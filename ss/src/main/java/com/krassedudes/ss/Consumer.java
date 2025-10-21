@@ -22,9 +22,6 @@ public class Consumer implements MessageListener {
 	private transient MessageConsumer consumer;
 	private transient Destination message_queue_raw;
 	private transient java.util.function.Consumer<String> callback;
-
-	private int current_scan_index = 0;
-	private double current_scan_angle = 0.0;
 	
 	public Consumer(String url, String topic, String user, String pw, java.util.function.Consumer<String> callback) throws JMSException {
 		this.callback = callback;
