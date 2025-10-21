@@ -3,15 +3,17 @@ package com.krassedudes.ss;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.Instant;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.github.cliftonlabs.json_simple.JsonException;
 
 public class App {
 
-    private static void run_consumer() throws Exception
+    private static void run_consumer_group() throws Exception
     {
         var scan_grouper = new ScanGrouper();
         var publisher = new Publisher("tcp://localhost:61616", "LIDARGROUPED", "admin", "admin");
+
         var consumer = new Consumer("tcp://localhost:61616", "LIDARRAW", "admin", "admin", (String message) -> {
             try
             {
@@ -27,14 +29,50 @@ public class App {
             }
         });
 
-        Instant wait_until = Instant.now().plusSeconds(60);
-
-        while(Instant.now().isBefore(wait_until))
+        synchronized(System.in)
         {
-            // Do a whole lot of nothing.
-            Thread.sleep(1000);
+            System.in.wait();
         }
+        consumer.close();
+    }
 
+    private static void run_consumer_distance() throws Exception
+    {
+        var publisher = new Publisher("tcp://localhost:61616", "LIDARDISTANCE", "admin", "admin");
+        AtomicReference<Vector2D> last_coordinate = new AtomicReference<Vector2D>(null);
+        AtomicReference<LidarDataGrouped> last_message = new AtomicReference<LidarDataGrouped>(null);
+        
+        var consumer = new Consumer("tcp://localhost:61616", "LIDARGROUPED", "admin", "admin", (String message) -> {
+            try
+            {
+                var lidar_data = LidarDataGrouped.fromJsonString(message);
+                Vector2D coordinate = Vector2D.fromPolar(Math.toRadians(lidar_data.angle), lidar_data.distance);
+                
+                if(last_message.get() != null && last_message.get().group == lidar_data.group)
+                {
+                    Vector2D delta = coordinate.delta(last_coordinate.get());
+                    double distance = delta.length();
+
+                    var payload = new LidarDistance(lidar_data.group, distance);
+                    publisher.publish(payload.toJsonString());
+                    System.out.println(payload.toJsonString());
+                }
+
+                last_message.set(lidar_data);
+                last_coordinate.set(coordinate);
+
+            }
+            catch(Exception e)
+            {
+                // ignore invalid messages
+            }
+        });
+
+
+        synchronized(System.in)
+        {
+            System.in.wait();
+        }
         consumer.close();
     }
 
@@ -68,10 +106,15 @@ public class App {
                 break;
             }
 
-
-            if(arg.compareTo("--consumer") == 0)
+            if(arg.compareTo("--consumer_group") == 0)
             {
-                App.run_consumer();
+                App.run_consumer_group();
+                break;
+            }
+
+            if(arg.compareTo("--consumer_distance") == 0)
+            {
+                App.run_consumer_distance();
                 break;
             }
         }

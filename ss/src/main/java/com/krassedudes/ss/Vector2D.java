@@ -17,6 +17,11 @@ public class Vector2D
         this.y = 0;
     }
 
+    public static Vector2D fromPolar(double angle, double distance)
+    {
+        return new Vector2D(Math.cos(angle) * distance, Math.sin(angle) * distance);
+    }
+
     public double length()
     {
         return Math.sqrt(x * x + y * y);
