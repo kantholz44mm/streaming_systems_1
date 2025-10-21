@@ -39,11 +39,11 @@ public class LidarData {
             
             return new LidarData(angle, distance, quality);
 
-        } catch(JsonException e)
+        }
+        catch(JsonException e)
         {
             // ignore invalid lines
             return null;
         }
     }
-
 }

@@ -10,41 +10,30 @@ import jakarta.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class LidarPublisher {
-
-	private static int total = 50000;
-	private static final String topic = "LIDAR";
+public class Publisher {
 
 	private transient ConnectionFactory factory;
 	private transient Connection connection;
 	private transient Session session;
 	private transient MessageProducer producer;
-	private transient Destination timestampTopic;
-	
+	private transient Destination message_queue;
 
-	private String brokerUrl = "tcp://localhost:61616";
+	public Publisher(String url, String topic, String user, String pw) throws JMSException, Exception {
 
-	public LidarPublisher() throws JMSException, Exception {
-
-		factory = new ActiveMQConnectionFactory(brokerUrl);
-		connection = factory.createConnection("admin", "admin");
+		factory = new ActiveMQConnectionFactory(url);
+		connection = factory.createConnection(user, pw);
 		connection.start();
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-		// use publish-subscribe
-		// timestampTopic = session.createTopic(topic); 
-
+		
 		// use point-2-point
-		timestampTopic = session.createQueue(topic); 
+		message_queue = session.createQueue(topic); 
 
-		producer = session.createProducer(timestampTopic);
+		producer = session.createProducer(message_queue);
 		producer.setTimeToLive(1000);
-				
 	}
 
-	public void publishLidarDataSet(LidarData data) {
+	public void publish(String payload) {
 		try {
-			String payload = data.toJsonString();
 			Message message = session.createTextMessage(payload);
 			producer.send(message);
 		}

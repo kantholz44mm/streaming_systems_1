@@ -10,24 +10,26 @@ import jakarta.jms.MessageListener;
 import jakarta.jms.Session;
 import jakarta.jms.TextMessage;
 
+import java.util.function.Function;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class LidarConsumer implements MessageListener {
-
-	private String brokerUrl = "tcp://localhost:61616";
+public class Consumer implements MessageListener {
 
 	private transient ConnectionFactory factory;
 	private transient Connection connection;
 	private transient Session session;
 	private transient MessageConsumer consumer;
-	private transient Destination lidartopic;
+	private transient Destination message_queue_raw;
+	private transient java.util.function.Consumer<String> callback;
 
-	private static final String topic = "LIDAR";
-
+	private int current_scan_index = 0;
+	private double current_scan_angle = 0.0;
 	
-	public LidarConsumer() throws JMSException {
-		factory = new ActiveMQConnectionFactory(brokerUrl);
-		connection = factory.createConnection("admin", "admin");
+	public Consumer(String url, String topic, String user, String pw, java.util.function.Consumer<String> callback) throws JMSException {
+		this.callback = callback;
+		factory = new ActiveMQConnectionFactory(url);
+		connection = factory.createConnection(user, pw);
 		connection.start();
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
@@ -37,8 +39,8 @@ public class LidarConsumer implements MessageListener {
 		// timestampTopic = session.createTopic(topic);
 
 		// use point-2-point
-		lidartopic = session.createQueue(topic); 
-		consumer = session.createConsumer(lidartopic);
+		message_queue_raw = session.createQueue(topic); 
+		consumer = session.createConsumer(message_queue_raw);
 		consumer.setMessageListener(this);
 	}
 
@@ -50,17 +52,15 @@ public class LidarConsumer implements MessageListener {
 
 	@Override
 	public void onMessage(Message msg) {
-		// do stuff.
+		
 		try {
 			TextMessage text_message = (TextMessage)msg;
 			String payload = text_message.getText();
-			LidarData data = LidarData.fromJsonString(payload);
-
-			System.out.println(data.toString());
+			callback.accept(payload);
 		}
 		catch(JMSException e)
 		{
-			// ignore.
+			// ignore all other messages.
 		}
 	}
 }
