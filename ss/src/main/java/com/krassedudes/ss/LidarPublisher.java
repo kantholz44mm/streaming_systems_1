@@ -6,12 +6,9 @@ import jakarta.jms.Destination;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageProducer;
-import jakarta.jms.QueueSender;
 import jakarta.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.joda.time.Instant;
-import org.springframework.jms.JmsException;
 
 public class LidarPublisher {
 
@@ -35,10 +32,10 @@ public class LidarPublisher {
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 		// use publish-subscribe
-		timestampTopic = session.createTopic(topic); 
+		// timestampTopic = session.createTopic(topic); 
 
 		// use point-2-point
-		// timestampTopic = session.createQueue(topic); 
+		timestampTopic = session.createQueue(topic); 
 
 		producer = session.createProducer(timestampTopic);
 		producer.setTimeToLive(1000);
