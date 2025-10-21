@@ -76,6 +76,41 @@ public class App {
         consumer.close();
     }
 
+    private static void run_consumer_summation() throws Exception
+    {
+        AtomicReference<Double> current_distance = new AtomicReference<Double>(0.0);
+        AtomicReference<Integer> current_scan_group = new AtomicReference<Integer>(0);
+
+        var consumer = new Consumer("tcp://localhost:61616", "LIDARDISTANCE", "admin", "admin", (String message) -> {
+            try
+            {
+                var lidar_distance = LidarDistance.fromJsonString(message);
+                if(lidar_distance.group != current_scan_group.get())
+                {
+                    var payload = new LidarDistance(current_scan_group.get(), current_distance.get());
+                    System.out.println(payload.toJsonString());
+                    current_scan_group.set(lidar_distance.group);
+                    current_distance.set(0.0);
+                }
+                else
+                {
+                    double new_distance = current_distance.get() + lidar_distance.distance;
+                    current_distance.set(new_distance);
+                }
+            }
+            catch(Exception e)
+            {
+                // ignore invalid messages
+            }
+        });
+
+        synchronized(System.in)
+        {
+            System.in.wait();
+        }
+        consumer.close();
+    }
+
     private static void run_publisher() throws Exception
     {
         Publisher publisher = new Publisher("tcp://localhost:61616", "LIDARRAW", "admin", "admin");
@@ -115,6 +150,12 @@ public class App {
             if(arg.compareTo("--consumer_distance") == 0)
             {
                 App.run_consumer_distance();
+                break;
+            }
+
+            if(arg.compareTo("--consumer_summation") == 0)
+            {
+                App.run_consumer_summation();
                 break;
             }
         }

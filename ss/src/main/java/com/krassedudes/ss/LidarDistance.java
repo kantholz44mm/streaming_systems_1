@@ -16,7 +16,7 @@ public class LidarDistance {
 
     public String toJsonString()
     {
-        return "{" + "\"group\": " + String.valueOf(group) + ", \"distanz\": " + String.valueOf(distance) + "}";
+        return "{" + "\"scan\": " + String.valueOf(group) + ", \"distance\": " + String.valueOf(distance) + "}";
     }
 
     public static LidarDistance fromJsonString(String json)
@@ -24,8 +24,8 @@ public class LidarDistance {
         try {
             JsonObject jsonObject = (JsonObject)Jsoner.deserialize(json);
     
-            int group = ((Number)jsonObject.get("group")).intValue();
-            double distance = ((Number)jsonObject.get("distanz")).doubleValue();
+            int group = ((Number)jsonObject.get("scan")).intValue();
+            double distance = ((Number)jsonObject.get("distance")).doubleValue();
             
             return new LidarDistance(group, distance);
 
