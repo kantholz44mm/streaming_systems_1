@@ -1,52 +1,53 @@
 package com.krassedudes.ss;
 
-import jakarta.jms.Connection;
-import jakarta.jms.ConnectionFactory;
-import jakarta.jms.Destination;
-import jakarta.jms.JMSException;
-import jakarta.jms.Message;
-import jakarta.jms.MessageProducer;
-import jakarta.jms.Session;
+import java.util.Properties;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
+public class Publisher implements AutoCloseable {
+    private final KafkaProducer<String, String> producer;
+    private final String topic;
 
-public class Publisher {
+    /**
+     * @param bootstrapServers e.g. "localhost:9092"
+     * @param topic Kafka topic
+     * @param user kept for compatibility (ignored unless SASL configured externally)
+     * @param pass kept for compatibility (ignored unless SASL configured externally)
+     */
+    public Publisher(String bootstrapServers, String topic, String user, String pass) {
+        this.topic = topic;
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, normalizeBootstrap(bootstrapServers));
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+        this.producer = new KafkaProducer<>(props);
+    }
 
-	private transient ConnectionFactory factory;
-	private transient Connection connection;
-	private transient Session session;
-	private transient MessageProducer producer;
-	private transient Destination message_queue;
+    private static String normalizeBootstrap(String s) {
+        if (s == null) return App.SERVER_HOST;
+        return s.replace("tcp://", "").replace("kafka://", "");
+    }
 
-	public Publisher(String url, String topic, String user, String pw) throws JMSException, Exception {
+    public void publish(String payload) {
+        ProducerRecord<String,String> record = new ProducerRecord<>(topic, payload);
+        producer.send(record, (RecordMetadata md, Exception ex) -> {
+            if (ex != null) {
+                System.err.println("Kafka publish failed: " + ex.getMessage());
+            }
+        });
+    }
 
-		factory = new ActiveMQConnectionFactory(url);
-		connection = factory.createConnection(user, pw);
-		connection.start();
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		
-		// use point-2-point
-		message_queue = session.createQueue(topic); 
-
-		producer = session.createProducer(message_queue);
-		producer.setTimeToLive(1000);
-	}
-
-	public void publish(String payload) {
-		try {
-			Message message = session.createTextMessage(payload);
-			producer.send(message);
-		}
-		catch(JMSException e)
-		{
-			System.err.println(e);
-		}
-	}
-
-	public void close() throws JMSException {
-		if (connection != null) {
-			connection.close();
-		}
-	}
-
+    @Override
+    public void close() {
+        try {
+            producer.flush();
+        } finally {
+            producer.close();
+        }
+    }
 }

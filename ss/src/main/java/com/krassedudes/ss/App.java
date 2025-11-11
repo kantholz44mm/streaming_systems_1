@@ -9,12 +9,16 @@ import com.github.cliftonlabs.json_simple.JsonException;
 
 public class App {
 
+    public static final String SERVER_HOST = "localhost:9092";
+    public static final String USERNAME = "admin";
+    public static final String PASSWORD = "admin";
+
     private static void run_consumer_group() throws Exception
     {
         var scan_grouper = new ScanGrouper();
-        var publisher = new Publisher("tcp://localhost:61616", "LIDARGROUPED", "admin", "admin");
+        var publisher = new Publisher(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD);
 
-        var consumer = new Consumer("tcp://localhost:61616", "LIDARRAW", "admin", "admin", (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARRAW", USERNAME, PASSWORD, (String message) -> {
             try
             {
                 var lidar_data = LidarData.fromJsonString(message);
@@ -38,11 +42,11 @@ public class App {
 
     private static void run_consumer_distance() throws Exception
     {
-        var publisher = new Publisher("tcp://localhost:61616", "LIDARDISTANCE", "admin", "admin");
+        var publisher = new Publisher(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD);
         AtomicReference<Vector2D> last_coordinate = new AtomicReference<Vector2D>(null);
         AtomicReference<LidarDataGrouped> last_message = new AtomicReference<LidarDataGrouped>(null);
         
-        var consumer = new Consumer("tcp://localhost:61616", "LIDARGROUPED", "admin", "admin", (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD, (String message) -> {
             try
             {
                 var lidar_data = LidarDataGrouped.fromJsonString(message);
@@ -81,7 +85,7 @@ public class App {
         AtomicReference<Double> current_distance = new AtomicReference<Double>(0.0);
         AtomicReference<Integer> current_scan_group = new AtomicReference<Integer>(0);
 
-        var consumer = new Consumer("tcp://localhost:61616", "LIDARDISTANCE", "admin", "admin", (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD, (String message) -> {
             try
             {
                 var lidar_distance = LidarDistance.fromJsonString(message);
@@ -113,11 +117,12 @@ public class App {
 
     private static void run_publisher() throws Exception
     {
-        Publisher publisher = new Publisher("tcp://localhost:61616", "LIDARRAW", "admin", "admin");
-    
+        Publisher publisher = new Publisher(SERVER_HOST, "LIDARRAW", USERNAME, PASSWORD);
+
         try (FileReader reader = new FileReader("resources/Lidar-scans.json"))
         {
             BufferedReader lineReader = new BufferedReader(reader);
+            
             lineReader.lines().map(LidarData::fromJsonString)
                               .filter((x) -> x != null)
                               .map((LidarData d) -> d.toJsonString())
