@@ -34,6 +34,20 @@ services:
       app-net:
         aliases: [ kafka , broker ] 
 
+  # ----------------------------------------
+  # Redis
+  # ----------------------------------------
+  redis:
+    image: redis:7.2
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      app-net:
+        aliases: [ redis ]
+        
 networks:
   app-net:
     name: messaging-net
