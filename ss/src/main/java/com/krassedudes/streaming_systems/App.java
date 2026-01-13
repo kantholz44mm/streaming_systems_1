@@ -45,18 +45,18 @@ public class App {
     private static void run_consumer_distance() throws Exception
     {
         var publisher = new Publisher(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD);
-        AtomicReference<Vector2D> last_coordinate = new AtomicReference<Vector2D>(null);
+        AtomicReference<Position> last_coordinate = new AtomicReference<Position>(null);
         AtomicReference<LidarDataGrouped> last_message = new AtomicReference<LidarDataGrouped>(null);
         
         var consumer = new Consumer(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD, (String message) -> {
             try
             {
                 var lidar_data = LidarDataGrouped.fromJsonString(message);
-                Vector2D coordinate = Vector2D.fromPolar(Math.toRadians(lidar_data.angle), lidar_data.distance);
+                Position coordinate = Position.fromPolar(Math.toRadians(lidar_data.angle), lidar_data.distance);
                 
                 if(last_message.get() != null && last_message.get().group == lidar_data.group)
                 {
-                    Vector2D delta = coordinate.delta(last_coordinate.get());
+                    Position delta = coordinate.delta(last_coordinate.get());
                     double distance = delta.length();
 
                     var payload = new LidarDistance(lidar_data.group, distance);
