@@ -15,7 +15,7 @@ public class App {
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "admin";
 
-    private static void run_consumer_group() throws Exception
+    private static void ex3_run_consumer_group() throws Exception
     {
         var scan_grouper = new ScanGrouper();
         var publisher = new Publisher(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD);
@@ -42,7 +42,7 @@ public class App {
         consumer.close();
     }
 
-    private static void run_consumer_distance() throws Exception
+    private static void ex3_run_consumer_distance() throws Exception
     {
         var publisher = new Publisher(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD);
         AtomicReference<Position> last_coordinate = new AtomicReference<Position>(null);
@@ -82,7 +82,7 @@ public class App {
         consumer.close();
     }
 
-    private static void run_consumer_summation() throws Exception
+    private static void ex3_run_consumer_summation() throws Exception
     {
         AtomicReference<Double> current_distance = new AtomicReference<Double>(0.0);
         AtomicReference<Integer> current_scan_group = new AtomicReference<Integer>(0);
@@ -117,7 +117,7 @@ public class App {
         consumer.close();
     }
 
-    private static void run_publisher() throws Exception
+    private static void ex3_run_publisher() throws Exception
     {
         Publisher publisher = new Publisher(SERVER_HOST, "LIDARRAW", USERNAME, PASSWORD);
 
@@ -138,31 +138,75 @@ public class App {
         publisher.close();
     }
 
+    private static void ex4_run_read_side() throws Exception {
+        ReadRepository vehicleRepository = null;
+
+        try {
+            vehicleRepository = new ReadRepository(SERVER_HOST, "VEHICLE_EVENT_STORE", USERNAME, PASSWORD);
+
+            synchronized(System.in)
+            {
+                System.in.wait();
+            }
+        } finally {
+            vehicleRepository.close();
+        }
+    }
+
+    private static void ex4_run_write_side() throws Exception {
+        VehicleCommandHandler commandHandler = null;
+
+        try {
+            commandHandler = new VehicleCommandHandler(SERVER_HOST, "VEHICLE_EVENT_STORE", USERNAME, PASSWORD);
+            commandHandler.createVehicle("VW Golf mit Allrad", new Position(50, 50));
+            commandHandler.moveVehicle("VW Golf mit Allrad", new Position(30, 4.15));
+
+            synchronized(System.in)
+            {
+                System.in.wait();
+            }
+        } finally {
+            commandHandler.close();
+        }
+    }
+
     public static void main(String[] args) throws Exception
     {
         for(String arg : args)
         {
-            if(arg.compareTo("--publisher") == 0)
+            if(arg.compareTo("--ex3_publisher") == 0)
             {
-                App.run_publisher();
+                App.ex3_run_publisher();
                 break;
             }
 
-            if(arg.compareTo("--consumer_group") == 0)
+            if(arg.compareTo("--ex3_consumer_group") == 0)
             {
-                App.run_consumer_group();
+                App.ex3_run_consumer_group();
                 break;
             }
 
-            if(arg.compareTo("--consumer_distance") == 0)
+            if(arg.compareTo("--ex3_consumer_distance") == 0)
             {
-                App.run_consumer_distance();
+                App.ex3_run_consumer_distance();
                 break;
             }
 
-            if(arg.compareTo("--consumer_summation") == 0)
+            if(arg.compareTo("--ex3_consumer_summation") == 0)
             {
-                App.run_consumer_summation();
+                App.ex3_run_consumer_summation();
+                break;
+            }
+
+            if(arg.compareTo("--ex4_read_side") == 0)
+            {
+                App.ex4_run_read_side();
+                break;
+            }
+
+            if(arg.compareTo("--ex4_write_side") == 0)
+            {
+                App.ex4_run_write_side();
                 break;
             }
         }

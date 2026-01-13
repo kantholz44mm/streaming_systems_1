@@ -31,6 +31,10 @@ public class ReadRepository implements Query {
         });
     }
 
+    public void close() {
+        this.queryDatabase.close();
+    }
+
     private void handleEvent(VehicleCommand event) {
         event.applyToDomainModel(this.vehicles);
     }

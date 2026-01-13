@@ -22,6 +22,10 @@ public class VehicleCommandHandler implements VehicleCommands {
         this.eventStore = new Publisher(bootstrapServers, topic, user, pass);
     }
 
+    public void close() {
+        this.eventStore.close();
+    }
+
     @Override
     public void createVehicle(String name, Position startPosition) throws Exception {
         if(!usedNames.add(name)) {
