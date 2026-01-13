@@ -1,1 +1,4 @@
 ss/target
+.metals/
+ss/test.json
+.vscode/settings.json
