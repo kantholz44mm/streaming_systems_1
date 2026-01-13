@@ -1,4 +1,4 @@
-package com.krassedudes.ss;
+package com.krassedudes.streaming_systems.models;
 
 public class Vector2D
 {

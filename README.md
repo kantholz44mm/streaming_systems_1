@@ -6,4 +6,4 @@ Bauen mit (Annahme: du bist im Ordner "ss"):
 mvn package
 
 Ausführen mit:
-mvn exec:java -Dexec.mainClass="com.krassedudes.ss.App" 
+mvn exec:java -Dexec.mainClass="com.krassedudes.streaming_systems.App" 

@@ -1,4 +1,4 @@
-package hob;
+package com.krassedudes.sample_code;
 
 
 import javax.jms.TextMessage;

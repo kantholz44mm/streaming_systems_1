@@ -1,4 +1,4 @@
-package hob;
+package com.krassedudes.sample_code;
 
 import java.util.ArrayList;
 import java.util.List;

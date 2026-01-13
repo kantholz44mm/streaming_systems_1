@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.krassedudes.ss</groupId>
-  <artifactId>ss</artifactId>
+  <groupId>com.krassedudes.streaming_systems</groupId>
+  <artifactId>streaming_systems</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>ss</name>
+  <name>streaming_systems</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -89,6 +89,13 @@
     <artifactId>kafka-clients</artifactId>
     <version>3.8.0</version>
   </dependency>
+  <!-- Source: https://mvnrepository.com/artifact/org.apache.beam/beam-sdks-java-core -->
+  <dependency>
+      <groupId>org.apache.beam</groupId>
+      <artifactId>beam-sdks-java-core</artifactId>
+      <version>2.70.0</version>
+      <scope>compile</scope>
+  </dependency>
 </dependencies>
 
   <build>
@@ -109,11 +116,11 @@
           <version>3.13.0</version>
           <configuration>
             <excludes>
-              <exclude>com/krassedudes/ss/Listener.java</exclude>
-              <exclude>com/krassedudes/ss/MyBrokerService.java</exclude>
-              <exclude>com/krassedudes/ss/TimestampConsumer.java</exclude>
-              <exclude>com/krassedudes/ss/TimestampPublisher.java</exclude>
-              <exclude>com/krassedudes/ss/WindowInfos.java</exclude>
+              <exclude>com/krassedudes/streaming_systems/sample_code/Listener.java</exclude>
+              <exclude>com/krassedudes/streaming_systems/sample_code/MyBrokerService.java</exclude>
+              <exclude>com/krassedudes/streaming_systems/sample_code/TimestampConsumer.java</exclude>
+              <exclude>com/krassedudes/streaming_systems/sample_code/TimestampPublisher.java</exclude>
+              <exclude>com/krassedudes/streaming_systems/sample_code/WindowInfos.java</exclude>
             </excludes>
           </configuration>
         </plugin>

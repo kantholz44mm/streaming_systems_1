@@ -1,4 +1,4 @@
-package com.krassedudes.ss;
+package com.krassedudes.streaming_systems.models;
 
 import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;

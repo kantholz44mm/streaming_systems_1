@@ -1,4 +1,6 @@
-package com.krassedudes.ss;
+package com.krassedudes.streaming_systems;
+
+import com.krassedudes.streaming_systems.models.*;
 
 import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;

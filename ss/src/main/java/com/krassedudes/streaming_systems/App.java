@@ -1,4 +1,6 @@
-package com.krassedudes.ss;
+package com.krassedudes.streaming_systems;
+
+import com.krassedudes.streaming_systems.models.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
