@@ -1,6 +1,7 @@
 package com.krassedudes.streaming_systems.models.commands;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.naming.directory.InvalidAttributeIdentifierException;
 
@@ -21,7 +22,8 @@ public abstract class VehicleCommand {
         this.name = name;
     }
 
-    public abstract void applyToDomainModel(HashMap<String, VehicleDTO> domainModel);
+    public abstract void applyToQueryModel(HashMap<String, VehicleDTO> queryModel);
+    public abstract void applyToDomainModel(HashSet<String> domainModel);
 
     public String toJsonString()
     {

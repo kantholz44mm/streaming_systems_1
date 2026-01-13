@@ -14,15 +14,13 @@ public class Publisher implements AutoCloseable {
     private final String topic;
 
     /**
-     * @param bootstrapServers e.g. "localhost:9092"
+     * @param host e.g. "localhost:9092"
      * @param topic Kafka topic
-     * @param user kept for compatibility (ignored unless SASL configured externally)
-     * @param pass kept for compatibility (ignored unless SASL configured externally)
      */
-    public Publisher(String bootstrapServers, String topic, String user, String pass) {
+    public Publisher(String host, String topic) {
         this.topic = topic;
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, normalizeBootstrap(bootstrapServers));
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, normalizeBootstrap(host));
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.ACKS_CONFIG, "all");

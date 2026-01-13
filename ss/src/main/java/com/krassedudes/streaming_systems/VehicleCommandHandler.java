@@ -15,20 +15,33 @@ import com.krassedudes.streaming_systems.models.commands.VehicleCommandRemove;
 
 public class VehicleCommandHandler implements VehicleCommands {
 
-    protected HashSet<String> usedNames = new HashSet<>();
     protected Publisher eventStore = null;
+    protected ReadRepository readRepository = null;
+    private static VehicleCommandHandler instance = null;
 
-    public VehicleCommandHandler(String bootstrapServers, String topic, String user, String pass) {
-        this.eventStore = new Publisher(bootstrapServers, topic, user, pass);
+    private VehicleCommandHandler(String host, String topic) {
+        this.eventStore = new Publisher(host, topic);
+        this.readRepository = ReadRepository.getInstance();
+    }
+
+    public static VehicleCommandHandler getInstance() {
+        if(instance == null) {
+            instance = new VehicleCommandHandler(App.SERVER_HOST, App.VEHICLE_TOPIC);
+        }
+        return instance;
     }
 
     public void close() {
         this.eventStore.close();
     }
 
+    private boolean vehicleExists(String name) {
+        return readRepository.getVehicleByName(name) != null;
+    }
+
     @Override
     public void createVehicle(String name, Position startPosition) throws Exception {
-        if(!usedNames.add(name)) {
+        if(vehicleExists(name)) {
             throw new DuplicateKeyException("The name " + name + " is already created.");
         }
 
@@ -38,7 +51,7 @@ public class VehicleCommandHandler implements VehicleCommands {
 
     @Override
     public void moveVehicle(String name, Position moveVector) throws Exception {
-        if(!usedNames.contains(name)) {
+        if(vehicleExists(name)) {
             throw new InvalidKeyException("The name " + name + " has not been created yet.");
         }
 
@@ -48,7 +61,7 @@ public class VehicleCommandHandler implements VehicleCommands {
 
     @Override
     public void removeVehicle(String name) throws Exception {
-        if(!usedNames.remove(name)) {
+        if(!vehicleExists(name)) {
             throw new InvalidKeyException("The name " + name + " has not been created yet.");
         }
 

@@ -1,6 +1,7 @@
 package com.krassedudes.streaming_systems.models.commands;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -18,9 +19,9 @@ public class VehicleCommandCreate extends VehicleCommand {
     }
 
     @Override
-    public void applyToDomainModel(HashMap<String, VehicleDTO> domainModel) {
+    public void applyToQueryModel(HashMap<String, VehicleDTO> queryModel) {
         VehicleInfo info = new VehicleInfo(this.name, this.startPosition, 0);
-        domainModel.put(this.name, info);
+        queryModel.put(this.name, info);
     }
 
     @Override
@@ -28,5 +29,10 @@ public class VehicleCommandCreate extends VehicleCommand {
     {
         String startPositionJson = this.startPosition.toJsonString();
         return "{" + "\"type\": \"create\", \"name\": \"" + this.name + "\", \"startPosition\": " + startPositionJson + "}";
+    }
+
+    @Override
+    public void applyToDomainModel(HashSet<String> domainModel) {
+        domainModel.add(this.name);
     }
 }

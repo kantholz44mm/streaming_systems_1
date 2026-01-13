@@ -1,5 +1,6 @@
 package com.krassedudes.streaming_systems;
 
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -20,9 +21,10 @@ public class ReadRepository implements Query {
 
     protected Consumer queryDatabase = null;
     protected HashMap<String, VehicleDTO> vehicles = new HashMap<>();
+    protected static ReadRepository instance = null;
 
-    public ReadRepository(String bootstrapServers, String topic, String user, String pass) {
-        this.queryDatabase = new Consumer(bootstrapServers, topic, user, pass, payload -> {
+    private ReadRepository(String bootstrapServers, String topic) {
+        this.queryDatabase = new Consumer(bootstrapServers, topic, payload -> {
             try {
                 this.handleEvent(VehicleCommand.fromJsonString(payload));
             } catch(Exception e) {
@@ -35,8 +37,16 @@ public class ReadRepository implements Query {
         this.queryDatabase.close();
     }
 
+    public static ReadRepository getInstance() {
+        if(instance == null) {
+            instance = new ReadRepository(App.SERVER_HOST, App.VEHICLE_TOPIC);
+        }
+
+        return instance;
+    }
+
     private void handleEvent(VehicleCommand event) {
-        event.applyToDomainModel(this.vehicles);
+        event.applyToQueryModel(this.vehicles);
     }
 
     @Override

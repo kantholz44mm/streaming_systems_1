@@ -1,15 +1,22 @@
 package com.krassedudes.streaming_systems;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+
+import com.krassedudes.streaming_systems.models.VehicleInfo;
+import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
 
 public class Consumer implements AutoCloseable {
     private final KafkaConsumer<String, String> consumer;
@@ -18,20 +25,19 @@ public class Consumer implements AutoCloseable {
     private final java.util.function.Consumer<String> callback;
 
     /**
-     * @param bootstrapServers e.g. "localhost:9092"
+     * @param host e.g. "localhost:9092"
      * @param topic Kafka topic to subscribe
-     * @param user kept for compatibility (ignored)
-     * @param pass kept for compatibility (ignored)
      * @param callback java.util.function.Consumer that handles each message value
      */
-    public Consumer(String bootstrapServers, String topic, String user, String pass, java.util.function.Consumer<String> callback) {
+    public Consumer(String host, String topic, java.util.function.Consumer<String> callback) {
         this.callback = callback;
         Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, normalizeBootstrap(bootstrapServers));
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, normalizeBootstrap(host));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "ss-" + topic + "-" + UUID.randomUUID());
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        
         this.consumer = new KafkaConsumer<>(props);
         this.consumer.subscribe(Collections.singletonList(topic));
 

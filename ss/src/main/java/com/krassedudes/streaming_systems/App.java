@@ -4,23 +4,23 @@ import com.krassedudes.streaming_systems.models.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.Instant;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.github.cliftonlabs.json_simple.JsonException;
+import org.springframework.dao.DuplicateKeyException;
 
 public class App {
 
     public static final String SERVER_HOST = "localhost:9092";
-    public static final String USERNAME = "admin";
-    public static final String PASSWORD = "admin";
+    public static final String VEHICLE_TOPIC = "VEHICLE_EVENT_STORE";
 
     private static void ex3_run_consumer_group() throws Exception
     {
         var scan_grouper = new ScanGrouper();
-        var publisher = new Publisher(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD);
+        var publisher = new Publisher(SERVER_HOST, "LIDARGROUPED");
 
-        var consumer = new Consumer(SERVER_HOST, "LIDARRAW", USERNAME, PASSWORD, (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARRAW", (String message) -> {
             try
             {
                 var lidar_data = LidarData.fromJsonString(message);
@@ -44,11 +44,11 @@ public class App {
 
     private static void ex3_run_consumer_distance() throws Exception
     {
-        var publisher = new Publisher(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD);
+        var publisher = new Publisher(SERVER_HOST, "LIDARDISTANCE");
         AtomicReference<Position> last_coordinate = new AtomicReference<Position>(null);
         AtomicReference<LidarDataGrouped> last_message = new AtomicReference<LidarDataGrouped>(null);
         
-        var consumer = new Consumer(SERVER_HOST, "LIDARGROUPED", USERNAME, PASSWORD, (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARGROUPED", (String message) -> {
             try
             {
                 var lidar_data = LidarDataGrouped.fromJsonString(message);
@@ -87,7 +87,7 @@ public class App {
         AtomicReference<Double> current_distance = new AtomicReference<Double>(0.0);
         AtomicReference<Integer> current_scan_group = new AtomicReference<Integer>(0);
 
-        var consumer = new Consumer(SERVER_HOST, "LIDARDISTANCE", USERNAME, PASSWORD, (String message) -> {
+        var consumer = new Consumer(SERVER_HOST, "LIDARDISTANCE", (String message) -> {
             try
             {
                 var lidar_distance = LidarDistance.fromJsonString(message);
@@ -119,7 +119,7 @@ public class App {
 
     private static void ex3_run_publisher() throws Exception
     {
-        Publisher publisher = new Publisher(SERVER_HOST, "LIDARRAW", USERNAME, PASSWORD);
+        Publisher publisher = new Publisher(SERVER_HOST, "LIDARRAW");
 
         try (FileReader reader = new FileReader("resources/Lidar-scans.json"))
         {
@@ -138,36 +138,29 @@ public class App {
         publisher.close();
     }
 
-    private static void ex4_run_read_side() throws Exception {
-        ReadRepository vehicleRepository = null;
+    private static void ex4_run() throws Exception {
+        ReadRepository readRepository = ReadRepository.getInstance();
+        VehicleCommandHandler commandHandler = VehicleCommandHandler.getInstance();
+
+        // give our projection time to get the latest data and build up our query model
+        Thread.sleep(10000);
 
         try {
-            vehicleRepository = new ReadRepository(SERVER_HOST, "VEHICLE_EVENT_STORE", USERNAME, PASSWORD);
-
-            synchronized(System.in)
-            {
-                System.in.wait();
-            }
-        } finally {
-            vehicleRepository.close();
+            commandHandler.createVehicle("VW Golf mit Allrad", new Position(50, 42));
+            commandHandler.moveVehicle("VW Golf mit Allrad", new Position(12.4, 4.13));
+        } catch(DuplicateKeyException e) {
+            // this may happen when we ran this program before and the key 
+            // "VW Golf mit Allrad" already exists.
+            System.err.println(e);
         }
-    }
 
-    private static void ex4_run_write_side() throws Exception {
-        VehicleCommandHandler commandHandler = null;
-
-        try {
-            commandHandler = new VehicleCommandHandler(SERVER_HOST, "VEHICLE_EVENT_STORE", USERNAME, PASSWORD);
-            commandHandler.createVehicle("VW Golf mit Allrad", new Position(50, 50));
-            commandHandler.moveVehicle("VW Golf mit Allrad", new Position(30, 4.15));
-
-            synchronized(System.in)
-            {
-                System.in.wait();
-            }
-        } finally {
-            commandHandler.close();
+        synchronized(System.in)
+        {
+            System.in.wait();
         }
+
+        readRepository.close();
+        commandHandler.close();
     }
 
     public static void main(String[] args) throws Exception
@@ -198,15 +191,9 @@ public class App {
                 break;
             }
 
-            if(arg.compareTo("--ex4_read_side") == 0)
+            if(arg.compareTo("--ex4") == 0)
             {
-                App.ex4_run_read_side();
-                break;
-            }
-
-            if(arg.compareTo("--ex4_write_side") == 0)
-            {
-                App.ex4_run_write_side();
+                App.ex4_run();
                 break;
             }
         }
