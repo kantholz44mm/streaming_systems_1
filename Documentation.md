@@ -24,6 +24,12 @@ Diese Fragen sollen **für jede Aufgabe** in der schriftlichen Ausarbeitung bean
 
 ## Aufgabe 1 – Installation (Apache ActiveMQ & Kafka)
 
+Die Installation erfolgte containerbasiert mit Docker Compose. Für ActiveMQ Artemis wurde das offizielle Docker-Image verwendet und der Broker über vordefinierte Zugangsdaten konfiguriert. Die Web-Konsole ermöglichte eine einfache Überprüfung der Installation, indem eine Queue angelegt sowie Testnachrichten erfolgreich gesendet und konsumiert wurden.
+
+Apache Kafka wurde ebenfalls über ein offizielles Docker-Image im KRaft-Modus betrieben. Hierfür war eine explizite Konfiguration der benötigten Umgebungsvariablen erforderlich, um den Broker lokal erreichbar zu machen. Die Korrektheit der Installation wurde mithilfe der mitgelieferten Kommandozeilenwerkzeuge überprüft, indem ein Topic erstellt und Nachrichten zwischen einem Producer und einem Consumer ausgetauscht wurden.
+
+Durch diese Tests konnte bestätigt werden, dass beide Systeme korrekt installiert sind und grundlegende Messaging-Funktionalitäten bereitstellen. Damit ist eine stabile Basis für die nachfolgenden Praktikumsaufgaben geschaffen.
+
 ---
 
 ## Aufgabe 2 – JMS & LiDAR-Datenverarbeitung
