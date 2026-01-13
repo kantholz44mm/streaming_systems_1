@@ -1,12 +1,17 @@
 package com.krassedudes.streaming_systems;
 
 import java.security.InvalidKeyException;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.function.Predicate;
+
+import javax.management.InvalidAttributeValueException;
 
 import org.springframework.dao.DuplicateKeyException;
 
 import com.krassedudes.streaming_systems.interfaces.VehicleCommands;
+import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.Position;
 import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
 import com.krassedudes.streaming_systems.models.commands.VehicleCommandCreate;
@@ -18,6 +23,8 @@ public class VehicleCommandHandler implements VehicleCommands {
     protected Publisher eventStore = null;
     protected ReadRepository readRepository = null;
     private static VehicleCommandHandler instance = null;
+
+    public static final int MAX_VEHICLE_MOTIONS = 5;
 
     private VehicleCommandHandler(String host, String topic) {
         this.eventStore = new Publisher(host, topic);
@@ -39,6 +46,42 @@ public class VehicleCommandHandler implements VehicleCommands {
         return readRepository.getVehicleByName(name) != null;
     }
 
+    private boolean vehicleMotionLimitReached(String name) {
+        VehicleDTO vehicle = readRepository.getVehicleByName(name);
+        return vehicle != null && vehicle.getNumberOfMoves() >= MAX_VEHICLE_MOTIONS;
+    }
+
+    private void removeObstacles(String name, Position moveVector) {
+        VehicleDTO vehicle = readRepository.getVehicleByName(name);
+
+        if(vehicle == null) {
+            return;
+        }
+
+        Position newPosition = vehicle.getPosition().add(moveVector);
+
+        Enumeration<VehicleDTO> obstacles = readRepository.getVehiclesAtPosition(newPosition);
+        while(obstacles.hasMoreElements()) {
+            VehicleDTO obstacle = obstacles.nextElement();
+            VehicleCommand removeCommand = new VehicleCommandRemove(obstacle.getName());
+            this.eventStore.publish(removeCommand.toJsonString());
+        }
+    }
+
+    private boolean vehicleWouldReturnToPreviousPosition(String name, Position movement) {
+        VehicleDTO vehicle = readRepository.getVehicleByName(name);
+        if(vehicle == null) {
+            return false;
+        }
+        
+        Position newPosition = vehicle.getPosition().add(movement);
+        Predicate<Position> findClosePositions = (Position p) -> {
+            return p.distance(newPosition) <= ReadRepository.CLOSENESS_THRESHOLD;
+        };
+
+        return vehicle.getPreviousPositions().stream().anyMatch(findClosePositions);
+    }
+
     @Override
     public void createVehicle(String name, Position startPosition) throws Exception {
         if(vehicleExists(name)) {
@@ -54,9 +97,18 @@ public class VehicleCommandHandler implements VehicleCommands {
         if(vehicleExists(name)) {
             throw new InvalidKeyException("The name " + name + " has not been created yet.");
         }
+        
+        if(moveVector.x == 0 && moveVector.y == 0) {
+            throw new InvalidAttributeValueException("Movement vector cannot be 0");
+        }
 
-        VehicleCommand moveCommand = new VehicleCommandMove(name, moveVector);
-        this.eventStore.publish(moveCommand.toJsonString());
+        if(vehicleMotionLimitReached(name) || vehicleWouldReturnToPreviousPosition(name, moveVector)) {
+            this.eventStore.publish(new VehicleCommandRemove(name).toJsonString());
+        } else {
+            removeObstacles(name, moveVector);
+            this.eventStore.publish(new VehicleCommandMove(name, moveVector).toJsonString());
+        }
+        
     }
 
     @Override

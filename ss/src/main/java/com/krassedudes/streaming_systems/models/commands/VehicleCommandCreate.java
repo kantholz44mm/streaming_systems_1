@@ -20,7 +20,7 @@ public class VehicleCommandCreate extends VehicleCommand {
 
     @Override
     public void applyToQueryModel(HashMap<String, VehicleDTO> queryModel) {
-        VehicleInfo info = new VehicleInfo(this.name, this.startPosition, 0);
+        VehicleInfo info = new VehicleInfo(this.name, this.startPosition);
         queryModel.put(this.name, info);
     }
 

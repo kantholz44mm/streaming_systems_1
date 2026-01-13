@@ -1,17 +1,24 @@
 package com.krassedudes.streaming_systems.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
 
 public class VehicleInfo implements VehicleDTO {
 
     private String name;
-    private Position position;
-    private int numberOfMoves;
+    private List<Position> positionHistory;
 
-    public VehicleInfo(String name, Position position, int moves) {
+    public VehicleInfo(String name, Position position) {
         this.name = name;
-        this.position = position;
-        this.numberOfMoves = moves;
+        this.positionHistory = new ArrayList<>();
+        this.positionHistory.add(position);
+    }
+
+    public VehicleInfo(String name, List<Position> positionHistory) {
+        this.name = name;
+        this.positionHistory = positionHistory;
     }
 
     @Override
@@ -21,12 +28,17 @@ public class VehicleInfo implements VehicleDTO {
 
     @Override
     public Position getPosition() {
-        return this.position;
+        return this.positionHistory.getLast();
     }
 
     @Override
     public int getNumberOfMoves() {
-        return this.numberOfMoves;
+        return Math.max(this.positionHistory.size() - 1, 0);
+    }
+
+    @Override
+    public List<Position> getPreviousPositions() {
+        return positionHistory.subList(0, positionHistory.size() - 1);
     }
     
 }

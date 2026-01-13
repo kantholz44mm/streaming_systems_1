@@ -17,7 +17,7 @@ public class ReadRepository implements Query {
 
     // this is rather arbitrary but we should not try to find
     // exact matches on float/double vectors.
-    private static final double CLOSENESS_THRESHOLD = 0.5f;
+    public static final double CLOSENESS_THRESHOLD = 0.5f;
 
     protected Consumer queryDatabase = null;
     protected HashMap<String, VehicleDTO> vehicles = new HashMap<>();

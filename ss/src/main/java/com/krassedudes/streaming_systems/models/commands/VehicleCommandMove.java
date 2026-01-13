@@ -2,6 +2,7 @@ package com.krassedudes.streaming_systems.models.commands;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.Position;
@@ -18,11 +19,12 @@ public class VehicleCommandMove extends VehicleCommand {
     @Override
     public void applyToQueryModel(HashMap<String, VehicleDTO> queryModel) {
         VehicleInfo info = (VehicleInfo)queryModel.get(this.name);
-        VehicleInfo newInfo = new VehicleInfo(
-            this.name,
-            info.getPosition().add(this.moveVector),
-            info.getNumberOfMoves() + 1);
+        Position newPosition = info.getPosition().add(this.moveVector);
+        List<Position> positionHistory = info.getPreviousPositions();
+        positionHistory.add(info.getPosition());
+        positionHistory.add(newPosition);
 
+        VehicleInfo newInfo = new VehicleInfo(this.name, positionHistory);
         queryModel.replace(this.name, newInfo);
     }
 
