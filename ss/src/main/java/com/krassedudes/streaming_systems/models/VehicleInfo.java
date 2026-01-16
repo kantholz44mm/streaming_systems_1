@@ -28,7 +28,10 @@ public class VehicleInfo implements VehicleDTO {
 
     @Override
     public Position getPosition() {
-        return this.positionHistory.getLast();
+        if (positionHistory.isEmpty()) {
+    return null; 
+}
+return positionHistory.get(positionHistory.size() - 1);
     }
 
     @Override

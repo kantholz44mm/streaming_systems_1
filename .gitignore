@@ -2,3 +2,5 @@ ss/target
 .metals/
 ss/test.json
 .vscode/settings.json
+ss/output/bad-lines/
+ss/output/raw-traffic/
