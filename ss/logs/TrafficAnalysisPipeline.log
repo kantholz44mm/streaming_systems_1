@@ -9,7 +9,7 @@
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-1
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-1
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -19,7 +19,7 @@
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -103,15 +103,15 @@
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571910077
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-1, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-1, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-1, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | Kafka startTimeMs: 1768575044149
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-1, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-1, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-1, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-1 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-1 unregistered
  INFO | Partitions assigned to split 0 (total 1): traffic-data-0
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
@@ -122,7 +122,7 @@
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -132,7 +132,7 @@
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -216,12 +216,12 @@
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571910289
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Found no committed offset for partition traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting offset for partition traffic-data-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null)], epoch=0}}.
+ INFO | Kafka startTimeMs: 1768575044416
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null)
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Found no committed offset for partition traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting offset for partition traffic-data-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null)], epoch=0}}.
  INFO | Reader-0: reading from traffic-data-0 starting at offset 0
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -231,7 +231,7 @@
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1271016823_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-3
+	client.id = consumer-Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-3
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -241,7 +241,7 @@
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1271016823_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -325,250 +325,23 @@
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571910330
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1271016823_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-3, groupId=Reader-0_offset_consumer_1271016823_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1247025933_beam-traffic-2de0da77-6f79-4200-b3ba-fd2d7fcae4af-3, groupId=Reader-0_offset_consumer_1247025933_beam-traffic-2de0da77-6f79-4200-b3ba-fd2d7fcae4af] Resetting the last seen epoch of partition traffic-data-0 to 0 since the associated topicId changed from x-X-7hhKQYeXvv5yaD6qPg to 7854EkcUTRWjw887LjT2oQ
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1247025933_beam-traffic-2de0da77-6f79-4200-b3ba-fd2d7fcae4af-3, groupId=Reader-0_offset_consumer_1247025933_beam-traffic-2de0da77-6f79-4200-b3ba-fd2d7fcae4af] Node -1 disconnected.
-o-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1271016823_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-3 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-2 unregistered
- INFO | Reader-0 is reading from topics [traffic-data]
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913020
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 740 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 740
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-5
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913024
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-5, groupId=Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575044466
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-3, groupId=Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-5, groupId=Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-5, groupId=Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-3, groupId=Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-3, groupId=Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1886834397_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-5 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_283657708_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-3 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-4 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-2 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -578,7 +351,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -588,7 +361,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -672,10 +445,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913123
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 820 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 820
+ INFO | Kafka startTimeMs: 1768575047029
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 190 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 190
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -684,7 +457,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-7
+	client.id = consumer-Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-5
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -694,7 +467,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -778,24 +551,24 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913126
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-7, groupId=Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575047034
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-5, groupId=Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-7, groupId=Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-7, groupId=Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-5, groupId=Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-5, groupId=Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_245973630_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-7 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1277153049_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-5 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-6 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-4 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -805,7 +578,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -815,7 +588,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -899,10 +672,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913386
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1230 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1230
+ INFO | Kafka startTimeMs: 1768575047302
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 460 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 460
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -911,7 +684,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-9
+	client.id = consumer-Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-7
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -921,7 +694,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1003,26 +776,26 @@ o-actively leaving the group
 	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
 
  INFO | initializing Kafka metrics collector
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913389
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-9, groupId=Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575047310
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-7, groupId=Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-9, groupId=Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-9, groupId=Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-7, groupId=Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-7, groupId=Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_114995592_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-9 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_900419733_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-7 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-8 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-6 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -1032,7 +805,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1042,7 +815,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1126,10 +899,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913910
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1410 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1410
+ INFO | Kafka startTimeMs: 1768575048052
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 1420 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 1420
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -1138,7 +911,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-11
+	client.id = consumer-Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-9
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1148,7 +921,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1230,26 +1003,26 @@ o-actively leaving the group
 	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
 
  INFO | initializing Kafka metrics collector
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571913913
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-11, groupId=Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575048065
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-9, groupId=Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-11, groupId=Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-11, groupId=Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-9, groupId=Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-9, groupId=Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1096581051_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-11 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1386972797_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-9 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-10 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-8 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -1259,7 +1032,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1269,7 +1042,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1353,10 +1126,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571914434
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1430 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1430
+ INFO | Kafka startTimeMs: 1768575048603
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 1790 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 1790
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -1365,7 +1138,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-13
+	client.id = consumer-Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-11
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1375,7 +1148,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1459,24 +1232,24 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571914437
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-13, groupId=Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575048606
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-11, groupId=Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-13, groupId=Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-13, groupId=Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-11, groupId=Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-11, groupId=Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_761977410_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-13 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1608623519_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-11 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-12 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-10 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -1486,7 +1259,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1496,7 +1269,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1580,10 +1353,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571914960
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1490 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1490
+ INFO | Kafka startTimeMs: 1768575049127
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 1870 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 1870
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -1592,7 +1365,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-15
+	client.id = consumer-Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-13
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1602,7 +1375,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1686,24 +1459,24 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571914963
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-15, groupId=Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575049130
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-13, groupId=Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-15, groupId=Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-15, groupId=Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-13, groupId=Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-13, groupId=Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1541717942_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-15 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_584606989_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-13 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-14 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-12 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -1713,7 +1486,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1723,7 +1496,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1807,10 +1580,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571915484
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1530 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1530
+ INFO | Kafka startTimeMs: 1768575049653
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 1910 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 1910
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -1819,7 +1592,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-17
+	client.id = consumer-Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-15
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1829,7 +1602,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -1913,24 +1686,24 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571915487
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-17, groupId=Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Kafka startTimeMs: 1768575049657
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-15, groupId=Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
  INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-17, groupId=Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-17, groupId=Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-15, groupId=Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-15, groupId=Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1765667706_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-17 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
+ INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1372959755_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-15 unregistered
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Resetting generation and member id due to: consumer pro-actively leaving the group
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Request joining group due to: consumer pro-actively leaving the group
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
  INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
  INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-16 unregistered
+ INFO | App info kafka.consumer for consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-14 unregistered
  INFO | Reader-0 is reading from topics [traffic-data]
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
@@ -1940,7 +1713,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18
+	client.id = consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-16
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -1950,7 +1723,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -2034,10 +1807,10 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571916013
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1670 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1670
+ INFO | Kafka startTimeMs: 1768575050296
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-16, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Assigned to partition(s): traffic-data-0
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-16, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Seeking to offset 1950 for partition traffic-data-0
+ INFO | Reader-0: reading from traffic-data-0 starting at offset 1950
  INFO | ConsumerConfig values: 
 	allow.auto.create.topics = true
 	auto.commit.interval.ms = 5000
@@ -2046,7 +1819,7 @@ o-actively leaving the group
 	bootstrap.servers = [localhost:9092]
 	check.crcs = true
 	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-19
+	client.id = consumer-Reader-0_offset_consumer_1449045423_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-17
 	client.rack = 
 	connections.max.idle.ms = 540000
 	default.api.timeout.ms = 60000
@@ -2056,7 +1829,7 @@ o-actively leaving the group
 	fetch.max.bytes = 52428800
 	fetch.max.wait.ms = 500
 	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
+	group.id = Reader-0_offset_consumer_1449045423_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835
 	group.instance.id = null
 	group.protocol = classic
 	group.remote.assignor = null
@@ -2140,924 +1913,22 @@ o-actively leaving the group
  INFO | initializing Kafka metrics collector
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571916016
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-19, groupId=Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-19, groupId=Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-19, groupId=Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1094085033_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-19 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-18 unregistered
- INFO | Reader-0 is reading from topics [traffic-data]
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571916538
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1700 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1700
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-21
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571916541
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-21, groupId=Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-21, groupId=Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-21, groupId=Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1625308064_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-21 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-20 unregistered
- INFO | Reader-0 is reading from topics [traffic-data]
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571917062
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1780 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1780
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-23
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571917065
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-23, groupId=Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-23, groupId=Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-23, groupId=Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_1122654287_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-23 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-22 unregistered
- INFO | Reader-0 is reading from topics [traffic-data]
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571917584
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1900 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1900
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-25
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571917587
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-25, groupId=Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | Reader-0: Returning from consumer pool loop
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-25, groupId=Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-25, groupId=Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-Reader-0_offset_consumer_43617597_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-25 unregistered
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Resetting generation and member id due to: consumer pro-actively leaving the group
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Request joining group due to: consumer pro-actively leaving the group
- INFO | Metrics scheduler closed
- INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
- INFO | Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
- INFO | Metrics reporters closed
- INFO | App info kafka.consumer for consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-24 unregistered
- INFO | Reader-0 is reading from topics [traffic-data]
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-26
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571918111
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-26, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Assigned to partition(s): traffic-data-0
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-26, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Seeking to offset 1940 for partition traffic-data-0
- INFO | Reader-0: reading from traffic-data-0 starting at offset 1940
- INFO | ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-27
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	enable.metrics.push = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba
-	group.instance.id = null
-	group.protocol = classic
-	group.remote.assignor = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metadata.recovery.strategy = none
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 524288
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.max.ms = 1000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
-
- INFO | initializing Kafka metrics collector
- INFO | Kafka version: 3.8.0
- INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571918113
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-26, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-27, groupId=Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | Opening writer b1f15471-cd9f-401b-86e5-a1062f08ca1c for window [2026-01-16T13:58:30.000Z..2026-01-16T13:58:40.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
- INFO | Opening writer 59d55678-b602-42c2-9448-ec6218d9b6ab for window [2026-01-16T13:58:30.000Z..2026-01-16T13:58:40.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
- INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/14b45fda59d55678-b602-42c2-9448-ec6218d9b6ab
- INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/16af9026b1f15471-cd9f-401b-86e5-a1062f08ca1c
+ INFO | Kafka startTimeMs: 1768575050307
+ INFO | [Consumer clientId=consumer-beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-16, groupId=beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1449045423_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835-17, groupId=Reader-0_offset_consumer_1449045423_beam-traffic-5f03aa90-653b-44b9-9de0-11c93481c835] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+ INFO | Opening writer 22fff4da-7e91-467d-b421-7a3fa8ea1690 for window [2026-01-16T14:50:40.000Z..2026-01-16T14:50:50.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
+ INFO | Opening writer aa7d344c-1c24-498b-9a2f-86ede0a77d04 for window [2026-01-16T14:50:40.000Z..2026-01-16T14:50:50.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
+ INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/47c50d6f22fff4da-7e91-467d-b421-7a3fa8ea1690
+ INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/cb1f882baa7d344c-1c24-498b-9a2f-86ede0a77d04
+ INFO | Finalizing 1 file results
+ INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/47c50d6f22fff4da-7e91-467d-b421-7a3fa8ea1690, shard=0, window=[2026-01-16T14:50:40.000Z..2026-01-16T14:50:50.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/raw2026-01-16T14:50:40.000Z-2026-01-16T14:50:50.000Z-pane-0-last-00000-of-00001.txt
+ INFO | Finalizing 1 file results
+ INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/cb1f882baa7d344c-1c24-498b-9a2f-86ede0a77d04, shard=0, window=[2026-01-16T14:50:40.000Z..2026-01-16T14:50:50.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/bad2026-01-16T14:50:40.000Z-2026-01-16T14:50:50.000Z-pane-0-last-00000-of-00001.txt
+ INFO | Opening writer 3f2b2742-4188-4761-aaa3-fcf09d92f4bc for window [2026-01-16T14:50:50.000Z..2026-01-16T14:51:00.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
+ INFO | Opening writer 1563630a-32c5-4865-83b0-62109a5f908d for window [2026-01-16T14:50:50.000Z..2026-01-16T14:51:00.000Z) pane PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0} destination null
+ INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/bc49aacf3f2b2742-4188-4761-aaa3-fcf09d92f4bc
+ INFO | Successfully wrote temporary file /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/c3fb5daf1563630a-32c5-4865-83b0-62109a5f908d
  INFO | Finalizing 1 file results
  INFO | Finalizing 1 file results
- INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/16af9026b1f15471-cd9f-401b-86e5-a1062f08ca1c, shard=0, window=[2026-01-16T13:58:30.000Z..2026-01-16T13:58:40.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/bad2026-01-16T13:58:30.000Z-2026-01-16T13:58:40.000Z-pane-0-last-00000-of-00001.txt
- INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/14b45fda59d55678-b602-42c2-9448-ec6218d9b6ab, shard=0, window=[2026-01-16T13:58:30.000Z..2026-01-16T13:58:40.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/raw2026-01-16T13:58:30.000Z-2026-01-16T13:58:40.000Z-pane-0-last-00000-of-00001.txt
- INFO | [Consumer clientId=consumer-Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-27, groupId=Reader-0_offset_consumer_1881572355_beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Node -1 disconnected.
- INFO | [Consumer clientId=consumer-beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba-26, groupId=beam-traffic-3729a47b-aa7e-4e7c-b7de-6715451a2aba] Node -1 disconnected.
+ INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/.temp-beam/bc49aacf3f2b2742-4188-4761-aaa3-fcf09d92f4bc, shard=0, window=[2026-01-16T14:50:50.000Z..2026-01-16T14:51:00.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/raw-traffic/raw2026-01-16T14:50:50.000Z-2026-01-16T14:51:00.000Z-pane-0-last-00000-of-00001.txt
+ INFO | Will copy temporary file FileResult{tempFilename=/Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/.temp-beam/c3fb5daf1563630a-32c5-4865-83b0-62109a5f908d, shard=0, window=[2026-01-16T14:50:50.000Z..2026-01-16T14:51:00.000Z), paneInfo=PaneInfo{isFirst=true, isLast=true, timing=ON_TIME, index=0, onTimeIndex=0}} to final location /Users/unknownacc/Documents/Studium/Master/WS/Streming Systems/git/ss/output/bad-lines/bad2026-01-16T14:50:50.000Z-2026-01-16T14:51:00.000Z-pane-0-last-00000-of-00001.txt

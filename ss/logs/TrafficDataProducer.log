@@ -98,9 +98,9 @@
  INFO | [Producer clientId=producer-1] Instantiated an idempotent producer.
  INFO | Kafka version: 3.8.0
  INFO | Kafka commitId: 771b9576b00ecf5b
- INFO | Kafka startTimeMs: 1768571912059
+ INFO | Kafka startTimeMs: 1768575046439
  INFO | [Producer clientId=producer-1] Cluster ID: 5L6g3nShT-eMCtK--X86sw
- INFO | [Producer clientId=producer-1] ProducerId set to 17 with epoch 0
+ INFO | [Producer clientId=producer-1] ProducerId set to 23 with epoch 0
  INFO | [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
  INFO | Metrics scheduler closed
  INFO | Closing reporter org.apache.kafka.common.metrics.JmxReporter
