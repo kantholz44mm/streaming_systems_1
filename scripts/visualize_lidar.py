@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, PillowWriter
 import json
 import math
 from math import pi
@@ -54,4 +54,6 @@ ani = FuncAnimation(
     repeat=True
 )
 
-plt.show()
+writer = PillowWriter(fps=10)  # 100 ms per frame = 10 fps
+
+ani.save("output.gif", writer=writer)
