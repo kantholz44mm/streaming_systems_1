@@ -127,6 +127,7 @@ public class App {
             
             lineReader.lines().map(LidarData::fromJsonString)
                               .filter((x) -> x != null)
+                              .filter((LidarData d) -> d.quality >= 15)
                               .map((LidarData d) -> d.toJsonString())
                               .forEach((String payload) -> publisher.publish(payload));
         }
