@@ -1,11 +1,8 @@
 package com.krassedudes.streaming_systems;
 
-import java.time.Instant;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.krassedudes.streaming_systems.interfaces.Query;

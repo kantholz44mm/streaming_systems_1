@@ -2,28 +2,10 @@ package com.krassedudes.streaming_systems.models;
 
 import java.io.Serializable;
 
-import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
 
-public class Position implements Serializable, Comparable<Position>
+public record Position(double x, double y) implements Serializable
 {
-    public double x = 0;
-    public double y = 0;
-
-    public Position(double x, double y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public Position()
-    {
-        this.x = 0;
-        this.y = 0;
-    }
-
     public static Position fromPolar(double angle, double distance)
     {
         return new Position(Math.cos(angle) * distance, Math.sin(angle) * distance);
@@ -49,14 +31,6 @@ public class Position implements Serializable, Comparable<Position>
 
     public double distance(Position to) {
         return this.delta(to).length();
-    }
-
-    // lexicographical
-    @Override
-    public int compareTo(Position other) {
-        int cmpX = Double.compare(this.x, other.x);
-        if (cmpX != 0) return cmpX;
-        return Double.compare(this.y, other.y);
     }
 
     public String toJsonString() {

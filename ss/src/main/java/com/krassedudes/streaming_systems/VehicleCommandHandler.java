@@ -2,8 +2,6 @@ package com.krassedudes.streaming_systems;
 
 import java.security.InvalidKeyException;
 import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import javax.management.InvalidAttributeValueException;
@@ -98,7 +96,7 @@ public class VehicleCommandHandler implements VehicleCommands {
             throw new InvalidKeyException("The name " + name + " has not been created yet.");
         }
         
-        if(moveVector.x == 0 && moveVector.y == 0) {
+        if(moveVector.x() == 0 && moveVector.y() == 0) {
             throw new InvalidAttributeValueException("Movement vector cannot be 0");
         }
 
