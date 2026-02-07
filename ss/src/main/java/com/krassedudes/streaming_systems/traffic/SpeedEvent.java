@@ -1,20 +1,18 @@
-
 package com.krassedudes.streaming_systems.traffic;
 
 import java.io.Serializable;
 import java.time.Instant;
 
-public class SpeedEvent implements Serializable {
-
-    private final int sensorId;
-    private final double speedMs;
-    private final Instant timestamp;
-
-    public SpeedEvent(int sensorId, double speedMs, Instant timestamp) {
-        this.sensorId = sensorId;
-        this.speedMs = speedMs;
-        this.timestamp = timestamp;
-    }
+/**
+ * Immutable event representing a speed measurement.
+ * Implemented as Java record to automatically provide
+ * equals, hashCode and toString.
+ */
+public record SpeedEvent(
+        int sensorId,
+        double speedMs,
+        Instant timestamp
+) implements Serializable {
 
     public int getSensorId() {
         return sensorId;
@@ -27,5 +25,4 @@ public class SpeedEvent implements Serializable {
     public Instant getTimestamp() {
         return timestamp;
     }
-    
 }
