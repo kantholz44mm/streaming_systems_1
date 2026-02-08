@@ -235,6 +235,195 @@ Um die Apache Beam Pipeline aus 5. so anzupassen, dass sie auch die Geschwindigk
 7. Nur Esper/Kafka.
 
 ---
+## Aufgabe 8 – Read-Process-Write Pattern (Kafka) mit Exactly-Once Semantik
+
+**Ziel der Aufgabe:**  
+In dieser Aufgabe wurde das Read-Process-Write-Pattern mit Apache Kafka so umgesetzt, dass jeder Datensatz exakt einmal verarbeitet wird – auch dann, wenn die Anwendung während der Verarbeitung abstürzt und anschließend neu gestartet wird. Der Schwerpunkt lag dabei nicht auf der fachlichen Logik, sondern auf der korrekten technischen Kopplung von:
+
+- Lesen von Nachrichten
+- fachlicher Verarbeitung
+- Schreiben der Ergebnisse
+- Offset-Commit in Kafka
+
+Diese Beschreibung kombiniert die ursprüngliche Aufgabenbeschreibung mit den Antworten auf die allgemeinen Fragen zu Aufgabe 8 zu einem einheitlichen, zusammenhängenden Dokument.
+
+
+### Architekturüberblick
+
+Die Anwendung ist in mehrere klar getrennte Komponenten aufgeteilt, um die Exactly-Once-Semantik sauber und nachvollziehbar implementieren zu können:
+
+- **TrafficReadProcessWriteApp**  
+  Einstiegspunkt der Anwendung. Lädt die Konfiguration, startet die Engine und behandelt das ordnungsgemäße Herunterfahren.
+
+- **KafkaEosReadProcessWriteEngine**  
+  Kernkomponente für das transaktionale Read-Process-Write. Hier werden Input gelesen, verarbeitet, Ergebnisse geschrieben und Offsets transaktional committed.
+
+- **TrafficProcessor**  
+  Fachliche Verarbeitung der einzelnen Datensätze (Parsing, Validierung). Entscheidet, ob ein Record in das OUT- oder BAD-Topic geschrieben wird.
+
+- **ProcessingResult**  
+  Transportobjekt, das das Verarbeitungsergebnis kapselt.
+
+- **TopicNames**  
+  Zentrale Verwaltung der verwendeten Kafka-Topicnamen.
+
+Zusätzlich wurde ein Bash-Skript (`run_task8.sh`) erstellt, das den kompletten Testablauf automatisiert: Topics werden zurückgesetzt, die Anwendung gestartet, ein künstlicher Absturz erzeugt, anschließend neu gestartet und die Ergebnisse automatisch verifiziert.
+
+
+### Datenfluss
+
+Der gesamte Datenfluss ist bewusst einfach gehalten:
+
+```
+                     +---------------------+
+traffic-data  -----> |  Kafka Consumer     |
+                     +---------------------+
+                               |
+                               v
+                     +---------------------+
+                     | TrafficProcessor    |
+                     +---------------------+
+                               |
+                               v
+                     +---------------------+
+                     |  Kafka Producer     |
+                     +---------------------+
+                         /           \
+                        /             \
+                       v               v
+        traffic-processed (OUT)   traffic-bad (BAD)
+```
+
+Jeder eingehende Datensatz wird genau einmal verarbeitet und abhängig vom Ergebnis entweder in das Topic:
+
+- `traffic-processed` (gültige Datensätze)
+- `traffic-bad` (fehlerhafte Datensätze)
+
+geschrieben. Dadurch kann am Ende sehr einfach überprüft werden, ob die Verarbeitung vollständig und korrekt war.
+
+
+### Exactly-Once Umsetzung
+
+Die Exactly-Once-Semantik wird durch die Nutzung von **Kafka-Transaktionen** realisiert. Dabei gilt der zentrale Grundsatz:
+
+> **Output schreiben und Offsets committen müssen in derselben Transaktion erfolgen.**
+
+#### Ablauf in der Engine
+
+Der technische Ablauf ist wie folgt implementiert:
+
+1. Lesen eines Batches von Nachrichten aus `traffic-data`
+2. Start einer neuen Kafka-Transaktion
+3. Verarbeitung jedes Records über den `TrafficProcessor`
+4. Schreiben der Ergebnisse nach OUT oder BAD
+5. Speichern der Consumer-Offsets innerhalb der Transaktion
+6. Commit der Transaktion
+
+Tritt vor Schritt 6 ein Fehler auf, wird die Transaktion verworfen.  
+Dadurch ist garantiert, dass entweder:
+
+- sowohl Output als auch Offset-Commit erfolgen  
+- oder beides nicht erfolgt  
+
+So werden Duplikate und Datenverluste zuverlässig verhindert.
+
+Im Rahmen der Implementierung wurde außerdem die maximale Anzahl der pro Poll verarbeiteten Records explizit begrenzt.  
+Dies geschah über folgende Kafka-Consumer-Einstellung:
+
+```
+Props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500");
+```
+
+Durch diese Konfiguration wird sichergestellt, dass pro `poll()`-Aufruf maximal 500 Nachrichten verarbeitet werden.  
+Dies verbessert die Stabilität der Anwendung und verhindert zu große Transaktionen oder zu lange Verarbeitungszeiten pro Batch.
+
+#### Eindeutige Identifikation von Nachrichten
+
+Jede ausgegebene Nachricht erhält zusätzlich einen eindeutigen Marker:
+
+```
+MID=<topic>-<partition>-<offset>
+```
+
+Diese Message-ID erlaubt es, nach einem Neustart zu prüfen, ob Datensätze doppelt verarbeitet wurden.
+
+### Test und Verifikation
+
+Zur automatischen Überprüfung wurde das Skript `run_task8.sh` implementiert.
+
+#### Ablauf des Tests
+
+Das Skript führt folgende Schritte aus:
+
+- Zurücksetzen aller relevanten Topics
+- Start der Anwendung
+- Einspeisen von 2000 Testdatensätzen
+- Erzwingen eines gezielten Absturzes vor dem Commit
+- Neustart der Anwendung
+- Warten auf vollständige Verarbeitung
+- Prüfung der Ergebnisse
+
+#### Prüfkriterien
+
+Am Ende wird geprüft, ob folgende Bedingung erfüllt ist:
+
+```
+Input lines == Output lines + Bad lines
+```
+
+Zusätzlich wird geprüft, dass jede MID genau einmal vorkommt.
+
+#### Beispielergebnis
+
+| Metric       | Value |
+|--------------|-------|
+| Input lines  | 2000  |
+| Output lines | 1809  |
+| Bad lines    | 191   |
+| Total        | 2000  |
+
+
+| Verification          | Result |
+|----------------------|--------|
+| Counts match exactly | OK     |
+| No duplicates        | OK     |
+
+Damit ist nachgewiesen, dass die Implementierung auch bei Abstürzen korrekt weiterarbeitet und Exactly-Once garantiert.
+
+---
+
+### Bewertung der Lösung
+
+#### Leistungsfähigkeit
+
+Die Leistungsfähigkeit der implementierten Lösung wird insgesamt als sehr gut eingeschätzt. Durch die batchweise Verarbeitung der eingehenden Datensätze kann eine hohe Effizienz erreicht werden, da nicht jeder Record einzeln, sondern jeweils in größeren Blöcken verarbeitet wird. Der zusätzliche Overhead durch die Verwendung von Kafka-Transaktionen fällt dabei nur gering ins Gewicht. In den durchgeführten Tests konnten mehrere tausend Datensätze innerhalb weniger Sekunden vollständig verarbeitet werden. Die eigentliche fachliche Verarbeitung ist sehr leichtgewichtig und stellt keinen Engpass dar. Die hauptsächlichen Bottlenecks liegen, wie auch in den vorherigen Aufgaben, in der Netzwerkkommunikation mit Kafka sowie in der notwendigen Serialisierung und Deserialisierung der Nachrichten.
+
+#### Skalierbarkeit
+
+Auch hinsichtlich der Skalierbarkeit zeigt die Lösung sehr gute Eigenschaften. Kafka ermöglicht durch die Aufteilung von Topics in mehrere Partitionen eine horizontale Skalierung der Verarbeitung. Über Consumer Groups können mehrere Instanzen der Anwendung parallel betrieben werden, wodurch sich die Verarbeitungslast flexibel verteilen lässt. Die eingesetzte Exactly-Once Semantik bleibt dabei auch bei mehreren parallel arbeitenden Instanzen erhalten, da Kafka durch die transaktionale Verarbeitung und eindeutige Offsets eine konsistente Verarbeitung garantiert. Dadurch ist das System problemlos erweiterbar und kann auch bei steigenden Datenmengen effizient betrieben werden.
+
+#### Korrektheit
+
+Die Korrektheit der Implementierung wurde vollständig automatisiert überprüft. Dazu wurde ein reproduzierbarer End-to-End-Test entwickelt, der den gesamten Ablauf der Anwendung abbildet. Im Test wird zunächst ein kontrollierter Absturz während der Verarbeitung simuliert. Anschließend wird die Anwendung neu gestartet und die Verarbeitung fortgesetzt. Am Ende erfolgt eine automatisierte Prüfung der Ergebnisse. Dabei wird kontrolliert, ob die Anzahl der verarbeiteten Datensätze vollständig ist und ob keine Duplikate entstanden sind. Durch diese Tests konnte zuverlässig nachgewiesen werden, dass die Exactly-Once Semantik auch im Fehlerfall korrekt eingehalten wird.
+
+#### Visualisierung
+
+Für diese Aufgabe war keine grafische Visualisierung erforderlich. Die Überprüfung der Ergebnisse erfolgte ausschließlich zahlenbasiert über das bereitgestellte Testskript. Die tabellarische Auswertung der Input-, Output- und Bad-Datensätze sowie die Prüfung auf Duplikate sind ausreichend, um die Korrektheit der Verarbeitung eindeutig nachzuweisen.
+
+#### Einsatz von KI
+
+Im Rahmen der Aufgabe wurde ChatGPT unterstützend eingesetzt. Die KI half insbesondere bei der Erstellung des Grundgerüsts für die transaktionale Kafka-Verarbeitung, bei der Entwicklung des automatisierten Testskripts sowie bei verschiedenen Konfigurationsfragen rund um Kafka und die Exactly-Once API. Der erzeugte Code musste jedoch in mehreren Punkten manuell angepasst und erweitert werden, insbesondere im Bereich des Offset-Handlings und der Fehlerbehandlung. Insgesamt wird der Anteil KI-generierten Codes auf etwa **25 %** geschätzt. Der Einsatz der KI führte dennoch zu einer spürbaren Zeitersparnis und einem schnelleren Einstieg in die komplexe Thematik.
+
+#### Verwendete Tools
+
+- Apache Kafka (Java Client API)
+- Java Standardbibliotheken
+- Bash-Skript
+- Maven
+- Unix-Tools: `grep`, `sort`, `uniq`, `wc`
+
+
+---
 
 ### Reflexion
 
