@@ -21,7 +21,7 @@ public class AverageSpeedFn extends Combine.CombineFn<SpeedEvent, AverageSpeedFn
 
     @Override
     public Accumulator addInput(Accumulator acc, SpeedEvent input) {
-        acc.sumKmh += input.getSpeedMs() * 3.6;
+        acc.sumKmh += input.speedMs() * 3.6;
         acc.count++;
         return acc;
     }

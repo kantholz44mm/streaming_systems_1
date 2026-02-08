@@ -1,9 +1,12 @@
 package com.krassedudes.streaming_systems;
 
 import com.krassedudes.streaming_systems.models.*;
+import com.krassedudes.streaming_systems.traffic.TrafficAnalysisPipeline;
+import com.krassedudes.streaming_systems.traffic.TrafficDataProducer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +17,7 @@ public class App {
 
     public static final String SERVER_HOST = "localhost:9092";
     public static final String VEHICLE_TOPIC = "VEHICLE_EVENT_STORE";
+    public static final String TRAFFIC_TOPIC = "TRAFFIC";
 
     private static void ex3_run_consumer_group() throws Exception
     {
@@ -164,6 +168,15 @@ public class App {
         commandHandler.close();
     }
 
+    private static void ex5_run_producer() throws Exception {
+        TrafficDataProducer.readAndPublishTrafficData("resources/Trafficdata.txt", TRAFFIC_TOPIC, SERVER_HOST);
+    }
+
+    private static void ex5_run_analysis() throws Exception {
+        TrafficAnalysisPipeline pipeline = new TrafficAnalysisPipeline();
+        pipeline.performTrafficAnalysis(SERVER_HOST, TRAFFIC_TOPIC, "resources/AverageSpeeds/avg");
+    }
+
     public static void main(String[] args) throws Exception
     {
         for(String arg : args)
@@ -195,6 +208,18 @@ public class App {
             if(arg.compareTo("--ex4") == 0)
             {
                 App.ex4_run();
+                break;
+            }
+
+            if(arg.compareTo("--ex5_producer") == 0)
+            {
+                App.ex5_run_producer();
+                break;
+            }
+
+            if(arg.compareTo("--ex5_analysis") == 0)
+            {
+                App.ex5_run_analysis();
                 break;
             }
         }

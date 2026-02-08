@@ -93,6 +93,8 @@ Für die Visualisierung wird ein Python-Skript mit Matplotlib erstellt, das die 
 
 ![Visualisierung der LIDAR-Datenpunkte](scripts/lidar_visualisation.gif)
 
+(Leider haben wir keine Möglichkeit gefunden, GIFs in PDFs einzubetten, deswegen finden sie die GIFs separat in der Abgabe)
+
 Man könnte natürlich auch andere Tools wie Plotly oder Grafana verwenden, aber wir waren/sind mit der animierten Grafik zufrieden. Wir haben die Zusammenführung der einzelnen Teilaufgaben in eine Ausführungsinstanz nicht vorgenommen, da dabei die gute Skalierbarkeit verloren geht. Die Umsetzung mit der aktuellen Architektur ist sehr simpel, da einfach mehrere der Startparameter mitgegeben werden können.
 
 2. Siehe Aufgabe 2.2. Die Leistungsfähigkeit ist erneut durch (De)Serialisierung/Netzwerk beschränkt. Bei der Messung des Durchsatzes kommen sehr ähnliche Werte wie bei der Umsetzung mit JMS zustande (+-10%).
@@ -155,10 +157,10 @@ Nun zu den "Fragen am Rande":
 1. Warum sollte `Position` die Schnittstelle `Comparable` implementieren?
 Damit man Instanzen vergleichen kann. Das ist notwendig um beispielsweise eine Position als Schlüssel in einer HashMap verwenden zu können.
 
-1. `Position` ist ein „reines“ Datenobjekt – würde das nicht für eine `record`-Umsetzung sprechen?
+2. `Position` ist ein „reines“ Datenobjekt – würde das nicht für eine `record`-Umsetzung sprechen?
 Ja.
 
-1. Was spricht dagegen?
+3. Was spricht dagegen?
 Wir haben nix gefunden und das Ganze als record implementiert. Funktioniert super. Ein potentieller Grund wäre, wenn die Daten in-Place mutiert werden müssten.
 
 ### Version 2:
@@ -179,6 +181,7 @@ Für die Version 2 des Systems wird das Domänenmodell aus der Write-Seite entfe
 
 Aus Zeitgründen nicht durchgeführt.
 
+
 2. Die Leistungsfähigkeit wird als "okay" eingeschätzt. Insgesamt entsteht der Eindruck, das System ist sehr overengineered, was vermutlich der simplen Anwendung zugrunde liegt. Durch die Entkopplung von Lesen und Schreiben entsteht ein Zeitverzug, welcher messbar die Ausführung einzelner Queries (also bis das Ergebnis "da" ist, nicht die eigentliche Aufrufszeit) steigert. Die Startzeit des Systems steigt proportional mit der Anzahl gespeicherter Commands, da das Repository erst alle Nachrichten verarbeiten muss. Hier könnte ein Snapshot-System deutliche Vorteile bezüglich Performanz bringen.
 
 3. Theoretisch ist das System gut skalierbar, da die Lese- und Schreibseiten unabhängig skaliert werden können. Beim Testen ist auffällig, dass es durch die Verteilung auf mehrere Knoten zu Race Conditions kommen kann. Dadurch ist es möglich, dass zwei Knoten einen leicht veralteten Stand haben, wenn das Repository noch nicht alle neuen Nachrichten verarbeitet hat. Somit können beide einen `create`-Befehl absetzen und das gleiche Fahrzeug würde zweimal erstellt. Dies wird zwar auf der Seite des Repository durch die Implementierung von `applyToQueryModel` wieder abgefangen, erzeugt aber fehlerhafte/redundante Logs. Ebenso wurde kein Load-Balancing o.Ä. genauer betrachtet, was allerdings in einem Produktivsystem die Last einzelner Knoten deutlich senken könnte.
@@ -189,11 +192,14 @@ Aus Zeitgründen nicht durchgeführt.
 
 ![Animiertes GIF, das die Fahrzeugpositionen zeigt](scripts/vehicle_collision_animation.gif)
 
-6. ChatGPT wurde verwendet, um das Konzept von CQRS besser zu verstehen. Die Erklärungen der KI sind allerdings mehr oder weniger nützlich, da sie teilweise wiedersprüchlich sind. Dadurch wurde eher keine Zeit eingespart. Der Code für die Visualisierung der Fahrzeugbewegungen wurde KI-generiert (Sinnvolle Daten mit Extremfällen, die Simulation/Auswertung erfolgt natürlich über das implementierte CQRS-System). Der Code für die Kommunikation mit Kafka ist nach wie vor KI-generiert (Consumer/Publisher). Diese Erfahrung zeigt (wie so oft) dass die KI noch erhebliche Probleme mit komplexen Problemstellungen hat, für einfache "Boilerplate"-Aufgaben gibt es dennoch Produktivitätsgewinne (z.B. Visualisierung)
+6. ChatGPT wurde verwendet, um das Konzept von CQRS besser zu verstehen. Die Erklärungen der KI sind allerdings mehr oder weniger nützlich, da sie teilweise wiedersprüchlich sind. Dadurch wurde eher keine Zeit eingespart. Der Code für die Visualisierung der Fahrzeugbewegungen wurde KI-generiert (Sinnvolle Daten mit Extremfällen, die Simulation/Auswertung erfolgt natürlich über das implementierte CQRS-System). Der Code für die Kommunikation mit Kafka ist nach wie vor KI-generiert (Consumer/Publisher). Diese Erfahrung zeigt (wie so oft) dass die KI noch erhebliche Probleme mit komplexen Problemstellungen hat, für einfache "Boilerplate"-Aufgaben gibt es dennoch Produktivitätsgewinne (z.B. Visualisierungsskript)
 
 ---
 
 ## Aufgabe 5 – Apache Beam & Datenanalyse
+
+Kein Transforms -> Serialiser direkt angeben
+
 1. Wie müssen Datensätze modelliert werden (z.B. `SpeedEvent`)?
 2. Wie wird die Ereigniszeit korrekt verarbeitet?
 3. Welche Transforms sind notwendig (Filter, GroupByKey, Combine, Window)?
@@ -218,34 +224,15 @@ Aus Zeitgründen nicht durchgeführt.
 
 ## Aufgabe 8 – Read-Process-Write (optional)
 
+Aus Zeitgründen nicht durchgeführt.
 
 ---
 
 ## Aufgabe 9 – Vergleichende Analyse (optional)
 
-### Vergleichskriterien
-1. Repräsentation von Ereignissen: Wie und mit welchen Datenstrukturen werden Ereignisse repräsentiert? Wie flexibel schätzen Sie die Datenstrukturen ein? Werden Vererbungsstrukturen unterst¨utzt? Welche Metainformationen werden mitgeführt?
+Aus Zeitgründen nicht durchgeführt.
 
-2. Wie werden Ereignisse / Nachrichten erzeugt und wie können diese dem Broker übermittelt werden? Welche Schritte sind hierzu erforderlich? Können Ereignisse gebündelt übertragen werden?
-
-3. Wie kann eine Konsumentenanwendung Ereignisse / Nachrichten von dem Broker entgegennehmen? Welche Stategien werden hierzu angeboten?
-
-4. Werden Ereignisse / Nachrichten dauerhaft gespeichert?
-
-5. Welche Auslieferungs- und Verarbeitungsgarantien werden unterstützt?
-
-6. Welche Maßnahmen müssen ergriffen werden, damit Ereignisse / Nachrichten gegen
-einen unberechtigten Zugriff gesichert werden können?
-
-7. Welche Programmiermodelle werden angeboten, um eintreffende Nachrichten / Ereignisse zu verarbeiten? Werden zustandsbehaftete Transformationen wie etwa Aggregationsfunktionen unterstützt und können Nachrichten / Ereignisse zeitlich gruppiert werden? Ist eine Auswertung nach Ereigniszeit möglich?
-
-8. Welche Skalierungsmöglichkeiten werden vom System unterstützt, um mitwachsen zu können hinsichtlich Datenvolumen, Datenfrequenz sowie Anzahl von Produzenten und Konsumenten?
-
-9. Gibt es Konzepte hinsichtlich einer Ausfallsicherheit des Systems? Wenn ja, wie ist die grundsätzliche Arbeitsweise.
-
-10. Typsicherheit: Wie typsicher ist das Programmiermodell? Wie können Fehler bei der Interpretation einer Nachricht erkannt werden? Z.B. erwartet ein Konsument einen Ereignistyp A, erhält jedoch eine Instanz vom Typ B.
-
-11. In welchen Programmiersprachen können die Produzenten- und Konsumentenanwendungen erstellt werden?
+---
 
 ### Reflexion
 16. Was sind die Stärken und Schwächen der jeweiligen Systeme?

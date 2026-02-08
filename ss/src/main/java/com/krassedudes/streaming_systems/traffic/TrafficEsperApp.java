@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.*;
 
 public class TrafficEsperApp {
-
+    /*
     private static final String DEFAULT_TOPIC = "traffic-data";
 
     public static void main(String[] args) {
@@ -194,7 +194,7 @@ public class TrafficEsperApp {
 
                 for (ConsumerRecord<String, String> r : records) {
                     try {
-                        SpeedEvent ev = SpeedEventParser.parse(r.value());
+                        SpeedEvent ev = CustomTransforms.parse(r.value());
 
                         Map<String, Object> event = new HashMap<>();
                         event.put("sensorId", ev.getSensorId());
@@ -211,4 +211,5 @@ public class TrafficEsperApp {
             
         }
     }
+        */
 }
