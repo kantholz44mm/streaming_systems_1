@@ -412,7 +412,11 @@ Für diese Aufgabe war keine grafische Visualisierung erforderlich. Die Überpr�
 
 #### Einsatz von KI
 
-Im Rahmen der Aufgabe wurde ChatGPT unterstützend eingesetzt. Die KI half insbesondere bei der Erstellung des Grundgerüsts für die transaktionale Kafka-Verarbeitung, bei der Entwicklung des automatisierten Testskripts sowie bei verschiedenen Konfigurationsfragen rund um Kafka und die Exactly-Once API. Der erzeugte Code musste jedoch in mehreren Punkten manuell angepasst und erweitert werden, insbesondere im Bereich des Offset-Handlings und der Fehlerbehandlung. Insgesamt wird der Anteil KI-generierten Codes auf etwa **25 %** geschätzt. Der Einsatz der KI führte dennoch zu einer spürbaren Zeitersparnis und einem schnelleren Einstieg in die komplexe Thematik.
+Im Rahmen der Aufgabe wurde ChatGPT intensiv unterstützend eingesetzt. Die KI half insbesondere bei der Erstellung des Grundgerüsts für die transaktionale Kafka-Verarbeitung, bei der Entwicklung des automatisierten Testskripts sowie bei verschiedenen Konfigurationsfragen rund um Kafka und die Exactly-Once API. Ein großer Teil der initialen Codebasis – vor allem die Grundstruktur der Read-Process-Write-Engine und der transaktionale Ablauf – entstand mithilfe von KI-Vorschlägen.
+
+In der praktischen Umsetzung zeigte sich jedoch, dass viele Probleme nicht im generierten Code selbst lagen, sondern in der Umgebung und im Testaufbau. Insbesondere bereits vorhandene Restdaten in den Kafka-Topics führten dazu, dass die Pipeline scheinbar „verstopft“ war und die Anwendung unerwartetes Verhalten zeigte. Das zuverlässige Zurücksetzen der Topics, das korrekte Offset-Handling und das saubere Neustarten der Anwendung mussten daher manuell ausgearbeitet und mehrfach angepasst werden. Auch die Fehlerbehandlung und das Zusammenspiel von Consumer, Producer und Transaktionen erforderten umfangreiche eigene Debugging-Arbeit.
+
+Insgesamt wird der Anteil KI-generierten Codes auf etwa 60–75 % geschätzt. Der Einsatz der KI beschleunigte die Entwicklung deutlich und erleichterte den Einstieg in die komplexe Thematik erheblich, während die finale Stabilisierung und das Debugging der Umgebung hauptsächlich manuell erfolgen mussten.
 
 #### Verwendete Tools
 
