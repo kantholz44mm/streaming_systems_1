@@ -418,15 +418,6 @@ In der praktischen Umsetzung zeigte sich jedoch, dass viele Probleme nicht im ge
 
 Insgesamt wird der Anteil KI-generierten Codes auf etwa 60–75 % geschätzt. Der Einsatz der KI beschleunigte die Entwicklung deutlich und erleichterte den Einstieg in die komplexe Thematik erheblich, während die finale Stabilisierung und das Debugging der Umgebung hauptsächlich manuell erfolgen mussten.
 
-#### Verwendete Tools
-
-- Apache Kafka (Java Client API)
-- Java Standardbibliotheken
-- Bash-Skript
-- Maven
-- Unix-Tools: `grep`, `sort`, `uniq`, `wc`
-
-
 ---
 
 ### Reflexion
