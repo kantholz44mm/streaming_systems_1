@@ -1,27 +1,5 @@
 # Fragen – Streaming Systems Praktikum (WS 2025/26)
 
-## Allgemeine Fragen zur Ausarbeitung
-Diese Fragen sollen **für jede Aufgabe** in der schriftlichen Ausarbeitung beantwortet werden:
-
-1. Welche Lösungs- und Umsetzungsstrategie wurde gewählt?
-2. Wie schätzen Sie die Leistungsfähigkeit der Lösung ein?
-   - Wurden neben der Basisfunktionalität zusätzliche Funktionen realisiert?
-3. Welche nicht-funktionalen Anforderungen (z.B. Skalierbarkeit, Durchsatz) wurden untersucht?
-   - Mit welchem Ergebnis?
-4. Wie haben Sie sich von der Korrektheit und Vollständigkeit der Lösung überzeugt?
-   - Gibt es eine systematische Teststrategie?
-5. Wie können die berechneten Ergebnisse geeignet dargestellt werden?
-   - Gibt es naheliegende Visualisierungsmöglichkeiten?
-6. Bei welchen Aufgaben haben Sie ChatGPT oder vergleichbare KI-Systeme eingesetzt?
-   - Wie hoch ist der Anteil maschinell generierten Codes?
-   - Wie schätzen Sie die Qualität ein?
-   - Wie aufwändig war die Anpassung und Fehlerkorrektur?
-   - Wie bewerten Sie den Produktivitätsgewinn?
-7. Welche zusätzlichen Frameworks und Bibliotheken wurden eingesetzt?
-   - Warum?
-
----
-
 ## Aufgabe 1 – Installation (Apache ActiveMQ & Kafka)
 
 1. Für die Installation wurde eine zentrale `docker-compose.yml` angelegt. Damit können mehrere Container verwaltet, gestartet und gestoppt werden. Diese zentrale Datei wird im Laufe der Aufgaben erweitert, je nach Anforderungen. Die finale Datei beinhaltet 3 Container:
@@ -198,42 +176,156 @@ Aus Zeitgründen nicht durchgeführt.
 
 ## Aufgabe 5 – Apache Beam & Datenanalyse
 
-Kein Transforms -> Serialiser direkt angeben
+1. Für diese Aufgabe wurde der Datentyp `SpeedEvent` angelegt, der die drei Daten aus `Trafficdata.txt` abbildet. Anschließend wurde eine Beam-Pipeline mit folgenden Schritten erstellt:
 
-1. Wie müssen Datensätze modelliert werden (z.B. `SpeedEvent`)?
-2. Wie wird die Ereigniszeit korrekt verarbeitet?
-3. Welche Transforms sind notwendig (Filter, GroupByKey, Combine, Window)?
-4. Wie werden Zeitfenster (Batch Window) umgesetzt?
-5. Wie wird die Durchschnittsgeschwindigkeit berechnet und ausgegeben?
-6. Was muss geändert werden, um ein Sliding Window (10s Länge, 5s Slide) zu verwenden?
-7. Welche Auswirkungen hat dies auf die Ergebnisse?
+   1. Einlesen der Datensätze aus Kafka (KafkaIO)
+   2. Parsen: String -> SpeedEvent
+   3. Filtern: Ist Speed(m/s) >= 0?
+   4. Windowing (10 Sekunden)
+   5. Extrahieren der Geschwindigkeiten
+   6. Berechnen der Durchschnittsgeschwindigkeit eines Fensters
+   7. Umrechnung von m/s -> km/h
+   8. Formatieren: (SensorID, Durchschnittsgeschwindigkeit) -> String
+   9. Schreiben der Datensätze in Ausgabedateien (TextIO)
 
----
+Die einzelnen Schritte wurden für bessere Lesbarkeit in Unterklassen ausgelagert. Diese sind alle in `traffic/CustomTransforms.java` zu finden. Die Pipeline ist recht lang für das was sie macht. Zum Beispiel kann das Umrechnen in km/h und die Berechnung des Durchschnitts kombiniert werden. Das haben wir hier nicht gemacht, weil so der Code lesbarer bleibt und es sich ohnehin um geringe Datenmengen handelt. Für das Publishen der Datensätze wird der Kafka-Publisher aus vorherigen Aufgaben wiederverwendet. Die Datei wird Zeile für Zeile eingelesen und auf den Server hochgeladen (wieder über den `Producer` aus vorherigen Aufgaben). Dabei wird bereits das Timestamp geparsed und dem Server übergeben, damit auf der Beam-Seite das extrahieren einfacher ist. Da die Timestamps in der Vergangenheit liegen, wird zudem eine `TimestampPolicyFactory` implementiert, damit die Timestamps von 2025 verwendet werden können.
 
-## Aufgabe 6 – CEP mit Esper / EPL
-1. Gibt es Unterschiede zu Aufgabe 5 (Apache Beam)?
-2. Was könnten Gründe für diese Unterschiede sein?
+2. Die Leistungsfähigkeit der Lösung ist sehr gut, die Pipeline ist bei Tests auch mit hunderdtausenden Datensätzen in wenigen Sekunden durch. Wie in 1. geschildert, könnte die Verarbeitung noch weiter optimiert werden, indem weniger Stages verwendet werden, die mehr auf einmal machen. Damit ist der Overhead der Orchestration geringer. Zusatzfunktionen wurden ansonsten nicht implementiert. Ein bemerkenswertes Feature ist der simple und lineare Aufbau der Pipeline, wodurch bei jedem Verarbeitungsschritt leicht Daten abgegriffen werden können. Auch die Abänderung der Verarbeitung ist sehr einfach.
 
----
+3. Wie in 3. erwähnt, wurden synthetische Daten generiert, um mehr als nur 2000 Datensätze zum Testen zu haben. Dabei haben wir festgestellt, dass bei 2000 Datensätzen der Overhead von Beam deutlich schwerer ins Gewicht fällt als die eigentliche Bearbeitung.
 
-## Aufgabe 7 – Complex Event Processing (Erweiterung)
-1. Wie kann die Korrektheit der Lösung überprüft werden?
-2. Wie müsste die Apache-Beam-Lösung aus Aufgabe 5 erweitert werden,wie sähe ein mögliches Umsetzungskonzept aus?
+4. Hauptsächlich manuelles Testing und Logging jedes Pipeline-Steps. Zudem wurden für die Mengen der Daten der einzelnen Steps geprüft, ob diese in sinnvollen Größenordnungen liegen.
 
----
+5. Auch hier könnten die Ausgabedaten in einem Graphen geplottet werden, was wir allerdings aus Zeitgründen nicht gemacht haben. Vermutlich würde man einigermaßen glatte Graphen ohne große Sprünge sehen, da ja die Durchschnittswerte der Fenster verwendet werden.
 
-## Aufgabe 8 – Read-Process-Write (optional)
+6. Der gesamte Code ist handgeschrieben, bis auf die Consumer und Producer der vorherigen Aufgaben. ChatGPT und Gemini wurden aber verwendet, um die genaue Syntax der einzelnen Befehle und Pipeline-Stage-Arten herauszufinden, insbesondere die Konfigurationsoptionen der KafkaIO- und TextIO-Stages. Der Produktivitätsgewinn im Vergleich zum manuellen "Durchblättern" der Dokumentation von Beam ist geschätzt sehr hoch.
 
-Aus Zeitgründen nicht durchgeführt.
+7. Neben Kafka und Beam wurde noch die Bibliothek "Joda" benutzt, hauptsächlich weil Beam die Zeit-Typen (`Instant`, `Duration` und Co.) nutzt.
 
 ---
 
-## Aufgabe 9 – Vergleichende Analyse (optional)
+## Aufgabe 6 & 7 – CEP mit Esper / EPL
 
-Aus Zeitgründen nicht durchgeführt.
+1. Für die Verwendung von EPL mit Esper wird zunächst der Initialisierungs-Tanz durchgeführt. Dabei wird eine Runtime erstellt, welche mit einer Konfiguration versehen wird. In der Konfiguration wird Esper informiert, welche Typen wir als Event verwenden möchten. Zusammen mit Aufgabe 7 haben wir dabei folgende Typen:
+
+   - SpeedEvent
+   - AverageSpeedEvent
+   - SpeedChangeEvent
+
+Anschließend wird in der Runtime der Zeitstempel auf das Datum des ersten Datensatzes gesetzt. Ansonsten würden alle eintreffenden Nachrichten als "vor der jetzigen Zeit" angesehen und verworfen werden.
+
+Anschließend werden zwei Queries kompiliert und deployed. Die erste soll die gleiche Frage wie Aufgabe 5 beantworten, wobei die zweite die Änderungen der Geschwindigkeit von >= 20 km/h zu neuen Events machen soll. Für jede Query wird ein Listener hinterlegt, der die Eventdaten einfach auf der Konsole ausgibt. Anschließend wird ein weiterer `Consumer` für Kafka angelegt, der auf Nachrichten des Typs `SpeedEvent` lauscht und diese in Objekte parst. Anschließend wird der Zeitstempel des Events an die Esper-Runtime weitergegeben, damit diese ihren internen Zeitstempel vorantreiben kann. Dann wird das Event ebenfalls an die Runtime übergeben. Die Listener der einzelnen Queries werden dann asynchron von der Runtime aufgerufen. Da sich das Format und die Beschaffenheit der Daten nicht ändert, wird der Publisher aus Aufgabe 5. wiederverwendet. Es kommen die gleichen Ergebnisse wie in Aufgabe 5. raus.
+
+Um die Apache Beam Pipeline aus 5. so anzupassen, dass sie auch die Geschwindigkeitsveränderungs-Events erkennt, könnten sie wie folgt erweitert werden:
+
+   - Zusätzliches Windowing über Durchschnittsgeschwindigkeiten
+   - Combine: Delta berechnen
+   - Filter: Delta >= 20 km/h?
+
+2. Die Leistungsfähigkeit ist erneut sehr gut, die Bearbeitung dauert wenige Sekunden, ebenfalls für große Datenmengen (100000+ Datensätze). Daher liegt auch hier die Vermutung nahe, dass der Overhead der Initialisierung deutlich größer ist als der Berechnungsaufwand.
+
+3. Aus Zeitgründen haben wir keine zusätzlichen Funktionen implementiert.
+
+4. Abgleich mit Ergebnissen aus Aufgabe 5.
+
+5. Auch hier könnte man die gleiche Visualisierung wie in Aufgabe 5. anfertigen, mit der zusätzlichen Information der Geschwindigkeitssprünge als zusätzliche Markierungen/Punkte in den Graphen.
+
+6. ChatGPT wurde verwendet, um den "Initialisierungstanz" von Esper und den EPL-Queries zu generieren. Auch die Queries selbst sind teilweise generiert, mussten aber immer händisch angepasst werden, weil die KI die Syntax nicht perfekt kennt. Die Zeitersparnis ist dennoch gut, da auch hier das Durchblättern der Dokumentation von Esper erspart bleibt.
+
+7. Nur Esper/Kafka.
 
 ---
 
 ### Reflexion
-16. Was sind die Stärken und Schwächen der jeweiligen Systeme?
-17. Wie schätzen Sie das zukünftige Potenzial der Technologien ein?
+
+# Vergleich von Messaging- und Event-Processing-Systemen
+
+## 1. Übersichtstabelle der Kernkriterien
+
+| Kriterium | JMS (Java Messaging Service) | Apache Kafka | Apache Beam | CEP (Esper / EPL) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Hintergrund** | Standard API für Messaging | Verteiltes, persistentes Log | Unified Model für Batch/Stream | In-Process Pattern Matching |
+| **Primärer Fokus** | Entkopplung von Apps | Hoher Durchsatz & Speicherung | Komplexe Datenpipelines | Echtzeit-Mustererkennung |
+| **Speicherung** | Kurzfristig (bis Abruf) | Dauerhaft (einstellbar) | Keine (nur Verarbeitung) | In-Memory (Zustand) |
+
+---
+
+## 2. Detaillierte Bewertung nach Kriterien
+
+### 1. Repräsentation von Ereignissen
+* **JMS:** Nutzt fest definierte Objekttypen (`TextMessage`, `MapMessage`, `ObjectMessage`). Vererbung wird unterstützt, ist aber oft starr. Metainformationen werden in Standard-Headern (z. B. `JMSCorrelationID`) mitgeführt.
+* **Kafka:** Arbeitet rein auf Byte-Ebene (Key-Value-Paare). Die Datenstruktur ist extrem flexibel (JSON, Avro, Protobuf). Metadaten wie Timestamps oder Header sind vorhanden, aber die Interpretation liegt beim Client.
+* **Beam:** Nutzt stark typisierte `PCollections`. Unterstützt komplexe Objekte und Vererbungsstrukturen via "Coder". Sehr flexibel für Transformationen.
+* **Esper:** Repräsentiert Events als Java-Objekte (POJOs/Records), Maps oder XML. Es ist sehr flexibel und unterstützt Vererbung (Super-Events), was komplexe Hierarchien in EPL-Anfragen erlaubt.
+
+### 2. Erzeugung und Übermittlung
+* **JMS:** Übermittlung an eine Queue oder ein Topic via `MessageProducer`. Bündelung (Batching) ist nur bedingt über Transaktionen möglich.
+* **Kafka:** Produzenten senden Records an Topics. Kafka ist auf **Bündelung** optimiert; Nachrichten werden für maximalen Durchsatz oft gesammelt übertragen.
+* **Beam:** Erzeugt Daten über Source-Connectors. Übermittlung erfolgt innerhalb der Pipeline-Struktur.
+* **Esper:** Ereignisse werden per API (`runtime.getEventService().sendEventBean()`) direkt in die Engine "gepusht". Da es In-Process läuft, entfällt der Netzwerk-Overhead eines Brokers.
+
+### 3. Konsumentenstrategien
+* **JMS:** Unterstützt **Push** (`MessageListener`) und **Pull** (`receive()`). Bietet Point-to-Point (Queue) und Publish/Subscribe (Topic).
+* **Kafka:** Nutzt ein **Pull-Modell**. Konsumenten (Consumer Groups) fragen Daten aktiv ab und verwalten ihren Lesefortschritt (Offset) selbst.
+* **Beam:** Verarbeitet Datenströme als Ganzes. Die Strategie wird durch den gewählten "Runner" (z. B. Flink, Spark, Dataflow) bestimmt.
+* **Esper:** Ereignisse werden über Listener (`UpdateListener`) verarbeitet, die sofort triggern, wenn ein Muster (EPL) zutrifft (**Push**).
+
+### 4. Dauerhafte Speicherung
+* **Kafka:** Das einzige System, das Daten standardmäßig **persistent** auf Festplatten speichert.
+* **JMS:** Speichert Nachrichten nur so lange, bis sie konsumiert wurden (oder das Zeitlimit abläuft).
+* **Beam & Esper:** Speichern Ereignisse nicht dauerhaft. Sie sind für die reine Verarbeitung zuständig.
+
+### 5. Auslieferungs- und Verarbeitungsgarantien
+* **JMS:** Unterstützt *At-most-once* und *At-least-once*.
+* **Kafka:** Unterstützt *At-least-once* und durch transaktionales Schreiben auch *Exactly-once*.
+* **Beam:** Fokus liegt auf *Exactly-once* (abhängig vom Runner).
+* **Esper:** Garantiert korrekte In-Memory-Verarbeitung; bei Systemabsturz geht der aktuelle Zustand jedoch verloren, sofern er nicht extern gesichert wurde.
+
+### 6. Sicherheit
+* **Alle Systeme:** Unterstützen Verschlüsselung via TLS/SSL.
+* **JMS/Kafka:** Bieten Authentifizierung (SASL, Zertifikate) und Autorisierung via ACLs.
+* **Beam/Esper:** Hier hängt die Sicherheit oft von der Host-Anwendung oder der Cloud-Umgebung ab.
+
+### 7. Programmiermodell & Zeitrechnung
+* **JMS:** Imperativ (Nachricht kommt -> Methode wird ausgeführt). Keine native Unterstützung für Zeitfenster oder Event-Time.
+* **Kafka:** Kafka Streams erlaubt zustandsbehaftete Transformationen, Aggregationen und Fenster. Event-Time wird unterstützt.
+* **Beam:** Das spezialisierteste Modell für **Event-Time**. Bietet Watermarks, Triggers und Windowing-Konzepte (Fixed, Sliding, Session).
+* **Esper:** Deklarative Sprache (**EPL**). Extrem stark bei **Aggregationsfunktionen** und zeitlichen Mustern (`->` Operator). Auswertung nach Ereigniszeit ist durch explizites Vorrücken der Zeit möglich.
+
+### 8. & 9. Skalierung und Ausfallsicherheit
+* **Kafka:** Skaliert hervorragend **horizontal** durch Partitionierung. Ausfallsicherheit durch Replikation (ISR-Modell).
+* **JMS:** Skaliert oft nur vertikal oder durch komplexere Broker-Cluster. Ausfallsicherheit via Master-Slave.
+* **Beam:** Skaliert über den Runner (z. B. tausende Knoten in Google Dataflow). Ausfallsicherheit durch Checkpointing.
+* **Esper:** Meist auf einen Knoten beschränkt (In-Memory). Skalierung und Ausfallsicherheit müssen oft auf Anwendungsebene (z. B. durch Sharding der Sensoren) gelöst werden.
+
+### 10. Typsicherheit
+* **Esper & Beam:** Sehr hoch durch Java-Typisierung und EPL-Validierung zur Kompilierzeit.
+* **Kafka:** Schwach im Kern (Bytes), wird aber meist durch die **Schema Registry** (Avro) kompensiert.
+* **JMS:** Mittelstark. `ObjectMessage` erfordert Typkonvertierung (Casting) zur Laufzeit.
+
+### 11. Programmiersprachen
+* **JMS:** Fast ausschließlich Java.
+* **Kafka:** Nativ Java/Scala, aber Clients für fast alle Sprachen (C, Python, Go etc.).
+* **Beam:** Java, Python und Go.
+* **Esper:** Java (Esper) und .NET (NEsper).
+
+---
+
+## 3. Persönliche Einschätzung
+
+### Stärken und Schwächen
+* **JMS:** Gut für klassische Enterprise-Apps, aber zu schwerfällig für moderne Big-Data-Anforderungen.
+* **Kafka:** Das Rückgrat moderner Echtzeitsysteme. Extrem performant und ausfallsicher, aber komplex in der Verwaltung.
+* **Beam:** Ideal für plattformunabhängige Pipelines ("Write once, run anywhere"). Die Abstraktion sorgt jedoch für eine steile Lernkurve.
+* **Esper:** Unschlagbar, wenn es darum geht, komplexe zeitliche Zusammenhänge mit wenig Code auszudrücken. Die In-Process-Natur ist Fluch und Segen zugleich (schnell, aber schwer zu verteilen).
+
+### Persönliche Einschätzung: Stärken, Schwächen und Potenzial
+
+Bei der Betrachtung dieser Technologien wird deutlich, dass die Wahl des Systems stark vom Kontext abhängt. Aus unserer Sicht sind **Kafka** für viele kleine bis mittlere Anwendungen oft zu **schwerfällig**. Für einzelne Entwickler oder überschaubare Projekte erfordern sie schlichtweg zu viel Konfiguration, Infrastruktur (wie Zookeeper oder Broker-Instanzen) und Wartungsaufwand. Sie liefern eine enorme Funktionsvielfalt, die in diesen Szenarien gar nicht ausgeschöpft wird. Der größte "Selling Point" – die massive horizontale Skalierbarkeit und Verteilbarkeit über ganze Rechenzentren hinweg – ist für den einzelnen Entwickler im Alltag oft irrelevant und steht dem schnellen Prototyping eher im Weg. In solchen Fällen sind leichtgewichtige Protokolle wie **MQTT** wesentlich besser geeignet, da sie den Fokus auf Einfachheit und Ressourcen-Effizienz legen.
+
+**Esper** sticht hier als besonders positive Ausnahme hervor. Es ist extrem **leichtgewichtig**, da es als In-Process-Library direkt in die Java-Anwendung eingebunden wird. Man spart sich das Management eines externen Brokers komplett. Für Anwendungen, die komplexe Logik auf Datenströmen in Echtzeit benötigen, ohne dabei eine riesige Server-Infrastruktur aufzubauen, ist Esper unschlagbar. Die SQL-ähnliche Syntax (EPL) ermöglicht es zudem, sehr mächtige Analysen mit nur wenigen Zeilen Code zu schreiben, was die Entwicklungszeit drastisch verkürzt.
+
+**Apache Beam** hingegen hat uns durch seine Flexibilität überzeugt. Das Programmiermodell ist sehr angenehm in der Verwendung und abstrahiert die Komplexität der zugrunde liegenden Runner sehr gut. Nach unserem Verständnis ist die große Stärke von Beam die nahtlose Anbindung an eine Vielzahl von Datenquellen. Die Erstellung einer Pipeline ist trotz der mächtigen Funktionen simpel und intuitiv, während die Verarbeitungsgeschwindigkeit dennoch hoch bleibt.
+
+**Fazit:** 
+Wir denken, **Kafka** wird weiterhin als Broker für Enterprise-Anwendungen verwendet. **JMS** wird an Beliebtheit verlieren, weil Java langsam aber sicher ebenfalls in einer Senke verschwinden wird (siehe [TIOBE index](https://www.tiobe.com/tiobe-index/java/)). Für einzelne Entwickler und moderne Softwareentwicklung sind **Esper** und **Beam** *relativ* leichtgewichtige Optionen.
