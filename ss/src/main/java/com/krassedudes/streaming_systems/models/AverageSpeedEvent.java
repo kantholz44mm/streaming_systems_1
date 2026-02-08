@@ -1,4 +1,4 @@
-package com.krassedudes.streaming_systems.traffic;
+package com.krassedudes.streaming_systems.models;
 
 import java.io.Serializable;
 

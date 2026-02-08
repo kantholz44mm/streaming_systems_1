@@ -1,13 +1,15 @@
 package com.krassedudes.streaming_systems.traffic;
 
-import java.time.Instant;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.windowing.BoundedWindow;
 import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 import org.apache.beam.sdk.values.KV;
 import org.joda.time.Duration;
 
+import com.krassedudes.streaming_systems.models.SpeedEvent;
+
 public class CustomTransforms {
+
     static class SpeedEventParser extends DoFn<KV<String, String>, SpeedEvent> {
     
         @Override
@@ -17,15 +19,8 @@ public class CustomTransforms {
 
         @ProcessElement
         public void processElement(@Element KV<String, String> element, OutputReceiver<SpeedEvent> out) {
-    
-            String[] parts = element.getValue().split("\\s+");
-    
-            Instant timestamp = Instant.parse(parts[0]);
-            int sensorId = Integer.parseInt(parts[1]);
-            double speedMs = Double.parseDouble(parts[2]);
-    
-            SpeedEvent event = new SpeedEvent(sensorId, speedMs, timestamp);
-            var joda_timestamp = new org.joda.time.Instant(timestamp.toEpochMilli());
+            var event = SpeedEvent.parse(element.getValue());
+            var joda_timestamp = new org.joda.time.Instant(event.getTimestampMs());
             out.outputWithTimestamp(event, joda_timestamp);
         }
     }
@@ -34,14 +29,14 @@ public class CustomTransforms {
 
         @ProcessElement
         public void processElement(@Element SpeedEvent event) {
-            System.out.println("Event: " + event + ", event-time: " + event.timestamp());
+            System.out.println("Event: " + event + ", event-time: " + event.getTimestampMs());
         }
     }
 
     static class ExtractSensorSpeedFn extends DoFn<SpeedEvent, KV<Integer, Double>> {
         @ProcessElement
         public void processElement(@Element SpeedEvent event, OutputReceiver<KV<Integer, Double>> out) {
-            out.output(KV.of(event.sensorId(), event.speedMs()));
+            out.output(KV.of(event.getSensorId(), event.getSpeedMs()));
         }
     }
 

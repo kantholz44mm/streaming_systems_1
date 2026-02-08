@@ -1,4 +1,4 @@
-package com.krassedudes.streaming_systems;
+package com.krassedudes.streaming_systems.cqrs;
 
 import java.security.InvalidKeyException;
 import java.util.Enumeration;
@@ -8,13 +8,15 @@ import javax.management.InvalidAttributeValueException;
 
 import org.springframework.dao.DuplicateKeyException;
 
-import com.krassedudes.streaming_systems.interfaces.VehicleCommands;
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
+import com.krassedudes.streaming_systems.App;
+import com.krassedudes.streaming_systems.Publisher;
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommand;
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommandCreate;
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommandMove;
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommandRemove;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleCommands;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.Position;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommandCreate;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommandMove;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommandRemove;
 
 public class VehicleCommandHandler implements VehicleCommands {
 

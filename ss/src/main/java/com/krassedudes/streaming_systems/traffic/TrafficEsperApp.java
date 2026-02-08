@@ -4,80 +4,78 @@ import com.espertech.esper.common.client.EPCompiled;
 import com.espertech.esper.common.client.EventBean;
 import com.espertech.esper.common.client.configuration.Configuration;
 import com.espertech.esper.compiler.client.CompilerArguments;
+import com.espertech.esper.compiler.client.EPCompileException;
 import com.espertech.esper.compiler.client.EPCompilerProvider;
 import com.espertech.esper.runtime.client.*;
-
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.errors.WakeupException;
-import org.apache.kafka.common.serialization.StringDeserializer;
-
-import java.time.Duration;
+import com.krassedudes.streaming_systems.Consumer;
+import com.krassedudes.streaming_systems.models.AverageSpeedEvent;
+import com.krassedudes.streaming_systems.models.SpeedEvent;
+import java.time.Instant;
 import java.util.*;
 
 public class TrafficEsperApp {
-    /*
-    private static final String DEFAULT_TOPIC = "traffic-data";
+    public static void performTrafficAnalysis(String host, String topic)
+        throws EPCompileException, EPDeployException {
 
-    public static void main(String[] args) {
-
-        String bootstrap = System.getenv().getOrDefault("KAFKA_BOOTSTRAP", "localhost:9092");
-        String topic = System.getenv().getOrDefault("TRAFFIC_TOPIC", DEFAULT_TOPIC);
-
-        // -------------------------
-        // 1) Esper: Event Types
-        // -------------------------
         Configuration cfg = new Configuration();
 
-        // Input event (from Kafka lines)
-        Map<String, Object> speedEventProps = new LinkedHashMap<>();
-        speedEventProps.put("sensorId", Integer.class);
-        speedEventProps.put("speedMs", Double.class);
-        speedEventProps.put("eventTimeMs", Long.class);
-        cfg.getCommon().addEventType("SpeedEventMap", speedEventProps);
-
-        // Derived average event (Task 6)
-        Map<String, Object> avgProps = new LinkedHashMap<>();
-        avgProps.put("sensorId", Integer.class);
-        avgProps.put("avgSpeedKmh", Double.class);
-        avgProps.put("windowStartMs", Long.class);
-        avgProps.put("windowEndMs", Long.class);
-        cfg.getCommon().addEventType("AverageSpeedEvent", avgProps);
-
-        // Complex event (Task 7)
-        Map<String, Object> changeProps = new LinkedHashMap<>();
-        changeProps.put("sensorId", Integer.class);
-        changeProps.put("prevAvgSpeedKmh", Double.class);
-        changeProps.put("currAvgSpeedKmh", Double.class);
-        changeProps.put("deltaKmh", Double.class);
-        changeProps.put("prevWindowStartMs", Long.class);
-        changeProps.put("prevWindowEndMs", Long.class);
-        changeProps.put("currWindowStartMs", Long.class);
-        changeProps.put("currWindowEndMs", Long.class);
-        cfg.getCommon().addEventType("SpeedChangeEvent", changeProps);
+        cfg.getCommon().addEventType("SpeedEvent", SpeedEvent.class);
+        cfg.getCommon().addEventType("AverageSpeedEvent", AverageSpeedEvent.class);
 
         String runtimeUri = "traffic-" + UUID.randomUUID();
         EPRuntime runtime = EPRuntimeProvider.getRuntime(runtimeUri, cfg);
 
-        // -------------------------
-        // 2) EPL: Task 6 -> AverageSpeedEvent
-        // -------------------------
-        String eplAvg = "insert into AverageSpeedEvent " +
-                "select " +
-                "  sensorId as sensorId, " +
-                "  avg(speedMs) * 3.6 as avgSpeedKmh, " +
-                "  min(eventTimeMs) as windowStartMs, " +
-                "  max(eventTimeMs) as windowEndMs " +
-                "from SpeedEventMap(speedMs >= 0) " +
-                "#ext_timed_batch(eventTimeMs, 10 sec) " +
-                "group by sensorId " +
-                "having count(*) > 0";
+        // initialize the internal timestamp to the first event since we have 2026.
+        runtime.getEventService().advanceTime(Instant.parse("2025-10-03T05:22:40.000Z").toEpochMilli());
 
-        
-        String eplAvgSelect = "select sensorId, avgSpeedKmh, windowStartMs, windowEndMs from AverageSpeedEvent";
+        String eplAvg = """
+            insert into AverageSpeedEvent 
+            select 
+            sensorId, 
+            coalesce(avg(speedMs) * 3.6, 0.0),
+            min(timestampMs), 
+            max(timestampMs) 
+            from SpeedEvent 
+            .win:ext_timed_batch(timestampMs, 10 sec) 
+            group by sensorId""";
 
+
+        EPCompiled compiled = EPCompilerProvider.getCompiler().compile(eplAvg, new CompilerArguments(cfg));
+        EPDeployment deployment = runtime.getDeploymentService().deploy(compiled);
+        EPStatement statement = deployment.getStatements()[0];
+
+        statement.addListener((newData, oldData, st, rt) -> {
+            if (newData == null) return;
+
+            for(EventBean b : newData) {
+                if(b.getUnderlying() instanceof AverageSpeedEvent avgEvent) {
+                    System.out.printf("[%s, %s) SensorId=%d AvgSpeed=%.2f km/h%n",
+                        Instant.ofEpochMilli(avgEvent.getWindowStartMs()).toString(),
+                        Instant.ofEpochMilli(avgEvent.getWindowEndMs()).toString(),
+                        avgEvent.getSensorId(),
+                        avgEvent.getAvgSpeedKmh());
+                }
+            }
+        });
+
+        Consumer kafkaConsumer = new Consumer(host, topic, message -> {
+            var event = SpeedEvent.parse(message);
+            runtime.getEventService().advanceTime(event.getTimestampMs());
+            runtime.getEventService().sendEventBean(event, "SpeedEvent");
+        });
+
+        synchronized(System.in)
+        {
+            try {
+                System.in.wait();
+            } catch (Exception ex) {}
+        }
+
+        kafkaConsumer.close();
+
+        return;
+
+/*
         // -------------------------
         // 3) EPL: Task 7 -> SpeedChangeEvent (complex event)
         // Temporal operator -> between consecutive avg events
@@ -170,7 +168,7 @@ public class TrafficEsperApp {
         // 4) Kafka Consumer
         // -------------------------
         Properties kprops = new Properties();
-        kprops.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrap);
+        kprops.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, host);
         kprops.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         kprops.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         kprops.put(ConsumerConfig.GROUP_ID_CONFIG, "esper-traffic-" + UUID.randomUUID());
@@ -194,12 +192,12 @@ public class TrafficEsperApp {
 
                 for (ConsumerRecord<String, String> r : records) {
                     try {
-                        SpeedEvent ev = CustomTransforms.parse(r.value());
+                        SpeedEvent ev = CustomTransforms.parseSpeedEvent(r.value());
 
                         Map<String, Object> event = new HashMap<>();
-                        event.put("sensorId", ev.getSensorId());
-                        event.put("speedMs", ev.getSpeedMs());
-                        event.put("eventTimeMs", ev.getTimestamp().toEpochMilli());
+                        event.put("sensorId", ev.sensorId());
+                        event.put("speedMs", ev.speedMs());
+                        event.put("eventTimeMs", ev.timestamp().toEpochMilli());
 
                         runtime.getEventService().sendEventMap(event, "SpeedEventMap");
                     } catch (Exception ignoreBadLine) {
@@ -210,6 +208,6 @@ public class TrafficEsperApp {
         } catch (WakeupException expectedOnShutdown) {
             
         }
-    }
         */
+    }
 }

@@ -1,10 +1,10 @@
-package com.krassedudes.streaming_systems.models.commands;
+package com.krassedudes.streaming_systems.cqrs.commands;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.Position;
 import com.krassedudes.streaming_systems.models.VehicleInfo;
 

@@ -1,10 +1,9 @@
-package com.krassedudes.streaming_systems.models.commands;
+package com.krassedudes.streaming_systems.cqrs.commands;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
-import com.krassedudes.streaming_systems.models.VehicleInfo;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 
 public class VehicleCommandRemove extends VehicleCommand {
     public VehicleCommandRemove(String name) {
