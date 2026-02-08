@@ -1,4 +1,4 @@
-package com.krassedudes.streaming_systems.interfaces;
+package com.krassedudes.streaming_systems.cqrs.interfaces;
 
 import java.util.Enumeration;
 

@@ -1,14 +1,16 @@
-package com.krassedudes.streaming_systems;
+package com.krassedudes.streaming_systems.cqrs;
 
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
-import com.krassedudes.streaming_systems.interfaces.Query;
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
+import com.krassedudes.streaming_systems.App;
+import com.krassedudes.streaming_systems.Consumer;
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommand;
+import com.krassedudes.streaming_systems.cqrs.interfaces.Query;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.Position;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
 
 public class ReadRepository implements Query {
 

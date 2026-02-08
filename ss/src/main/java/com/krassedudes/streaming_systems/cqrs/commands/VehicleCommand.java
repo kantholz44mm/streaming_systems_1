@@ -1,4 +1,4 @@
-package com.krassedudes.streaming_systems.models.commands;
+package com.krassedudes.streaming_systems.cqrs.commands;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonKey;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 import com.krassedudes.streaming_systems.models.LidarDistance;
 import com.krassedudes.streaming_systems.models.Position;
 

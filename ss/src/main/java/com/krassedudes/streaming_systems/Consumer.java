@@ -15,8 +15,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import com.krassedudes.streaming_systems.cqrs.commands.VehicleCommand;
 import com.krassedudes.streaming_systems.models.VehicleInfo;
-import com.krassedudes.streaming_systems.models.commands.VehicleCommand;
 
 public class Consumer implements AutoCloseable {
     private final KafkaConsumer<String, String> consumer;

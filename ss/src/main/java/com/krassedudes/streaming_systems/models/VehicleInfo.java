@@ -3,7 +3,7 @@ package com.krassedudes.streaming_systems.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.krassedudes.streaming_systems.interfaces.VehicleDTO;
+import com.krassedudes.streaming_systems.cqrs.interfaces.VehicleDTO;
 
 public class VehicleInfo implements VehicleDTO {
 

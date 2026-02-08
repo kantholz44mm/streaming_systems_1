@@ -1,4 +1,4 @@
-package com.krassedudes.streaming_systems;
+package com.krassedudes.streaming_systems.lidar;
 
 import com.krassedudes.streaming_systems.models.LidarData;
 

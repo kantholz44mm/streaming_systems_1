@@ -1,19 +1,24 @@
 package com.krassedudes.streaming_systems;
 
+import com.krassedudes.streaming_systems.cqrs.ReadRepository;
+import com.krassedudes.streaming_systems.cqrs.VehicleCommandHandler;
+import com.krassedudes.streaming_systems.lidar.ScanGrouper;
 import com.krassedudes.streaming_systems.models.*;
+import com.krassedudes.streaming_systems.traffic.TrafficAnalysisPipeline;
+import com.krassedudes.streaming_systems.traffic.TrafficDataProducer;
+import com.krassedudes.streaming_systems.traffic.TrafficEsperApp;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.springframework.dao.DuplicateKeyException;
 
 public class App {
 
     public static final String SERVER_HOST = "localhost:9092";
     public static final String VEHICLE_TOPIC = "VEHICLE_EVENT_STORE";
+    public static final String TRAFFIC_TOPIC = "TRAFFIC";
+    public static final String TRAFFIC_INPUT_FILE = "resources/Trafficdata.txt";
 
     private static void ex3_run_consumer_group() throws Exception
     {
@@ -40,6 +45,7 @@ public class App {
             System.in.wait();
         }
         consumer.close();
+        publisher.close();
     }
 
     private static void ex3_run_consumer_distance() throws Exception
@@ -80,6 +86,7 @@ public class App {
             System.in.wait();
         }
         consumer.close();
+        publisher.close();
     }
 
     private static void ex3_run_consumer_summation() throws Exception
@@ -130,13 +137,17 @@ public class App {
                               .filter((LidarData d) -> d.quality >= 15)
                               .map((LidarData d) -> d.toJsonString())
                               .forEach((String payload) -> publisher.publish(payload));
+
+            lineReader.close();
         }
         catch (Exception e)
         {
             throw new RuntimeException(e);
         }
-
-        publisher.close();
+        finally
+        {
+            publisher.close();
+        }
     }
 
     private static void ex4_run() throws Exception {
@@ -162,6 +173,18 @@ public class App {
 
         readRepository.close();
         commandHandler.close();
+    }
+
+    private static void ex5_run_producer() throws Exception {
+        TrafficDataProducer.readAndPublishTrafficData(TRAFFIC_INPUT_FILE, TRAFFIC_TOPIC, SERVER_HOST);
+    }
+
+    private static void ex5_run_analysis() throws Exception {
+        TrafficAnalysisPipeline.performTrafficAnalysis(SERVER_HOST, TRAFFIC_TOPIC, "resources/AverageSpeeds/avg");
+    }
+
+    private static void ex6_run_analysis() throws Exception {
+        TrafficEsperApp.performTrafficAnalysis(SERVER_HOST, TRAFFIC_TOPIC);
     }
 
     public static void main(String[] args) throws Exception
@@ -195,6 +218,24 @@ public class App {
             if(arg.compareTo("--ex4") == 0)
             {
                 App.ex4_run();
+                break;
+            }
+
+            if(arg.compareTo("--ex5_producer") == 0)
+            {
+                App.ex5_run_producer();
+                break;
+            }
+
+            if(arg.compareTo("--ex5_analysis") == 0)
+            {
+                App.ex5_run_analysis();
+                break;
+            }
+
+            if(arg.compareTo("--ex6_analysis") == 0)
+            {
+                App.ex6_run_analysis();
                 break;
             }
         }
