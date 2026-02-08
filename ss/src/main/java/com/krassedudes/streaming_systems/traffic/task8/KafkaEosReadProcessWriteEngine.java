@@ -3,7 +3,10 @@ package com.krassedudes.streaming_systems.traffic.task8;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.errors.AuthorizationException;
+import org.apache.kafka.common.errors.OutOfOrderSequenceException;
 import org.apache.kafka.common.errors.ProducerFencedException;
+import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -58,7 +61,7 @@ public final class KafkaEosReadProcessWriteEngine {
         this.producer = new KafkaProducer<>(pProps);
     }
 
-    public void start(TrafficProcessor processor) {
+    public void start(TrafficProcessor processor, long failAfter) {
         Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
 
         System.out.println("[task8] initTransactions()");
@@ -67,59 +70,76 @@ public final class KafkaEosReadProcessWriteEngine {
         System.out.println("[task8] subscribe(" + inputTopic + ")");
         consumer.subscribe(Collections.singletonList(inputTopic));
 
-        while (running.get()) {
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
-            if (records.isEmpty()) continue;
+        long processedTotal = 0;
 
-            try {
-                producer.beginTransaction();
+        try {
+            while (running.get()) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
+                if (records.isEmpty()) continue;
 
-                long okCount = 0;
-                long badCount = 0;
+                try {
+                    producer.beginTransaction();
 
-                for (ConsumerRecord<String, String> r : records) {
-                    String line = r.value();
+                    long okCount = 0;
+                    long badCount = 0;
 
-                    ProcessingResult res = processor.process(line);
+                    for (ConsumerRecord<String, String> r : records) {
+                        final String mid = "MID=" + r.topic() + "-" + r.partition() + "-" + r.offset();
+                        final ProcessingResult res = processor.process(r.value());
 
-                    if (res.isOk()) {
-                        String out = res.outValue().orElseThrow();
-                        producer.send(new ProducerRecord<>(outTopic, null, out));
-                        okCount++;
-                    } else {
-                        String bad = res.badValue().orElseThrow();
-                        producer.send(new ProducerRecord<>(badTopic, null, bad));
-                        badCount++;
+                        if (res.isOk()) {
+                            final String out = mid + " " + res.outValue().orElseThrow();
+                            producer.send(new ProducerRecord<>(outTopic, null, r.timestamp(), null, out));
+                            okCount++;
+                        } else {
+                            final String bad = mid + " " + res.badValue().orElseThrow();
+                            producer.send(new ProducerRecord<>(badTopic, null, r.timestamp(), null, bad));
+                            badCount++;
+                        }
+
+                        processedTotal++;
+
+                        if (failAfter > 0 && processedTotal >= failAfter) {
+                            System.out.println("[task8] FAIL_AFTER reached (" + failAfter + ") -> crashing BEFORE commitTransaction()");
+                            throw new RuntimeException("Intentional crash for EOS test (FAIL_AFTER=" + failAfter + ")");
+                        }
+                    }
+
+                    Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
+                    for (TopicPartition tp : records.partitions()) {
+                        List<ConsumerRecord<String, String>> tpRecords = records.records(tp);
+                        long lastOffset = tpRecords.get(tpRecords.size() - 1).offset();
+                        offsets.put(tp, new OffsetAndMetadata(lastOffset + 1));
+                    }
+
+                    producer.sendOffsetsToTransaction(offsets, consumer.groupMetadata());
+                    producer.commitTransaction();
+
+                    System.out.printf("[task8] committed tx: records=%d out=%d bad=%d partitions=%d%n",
+                            records.count(), okCount, badCount, records.partitions().size());
+
+                } catch (ProducerFencedException | OutOfOrderSequenceException | AuthorizationException fatal) {
+                    System.err.println("[task8][FATAL] " + fatal.getClass().getSimpleName() + " -> stopping");
+                    running.set(false);
+
+                } catch (Exception ex) {
+                    System.err.println("[task8][WARN] abortTransaction due to error: " + ex.getClass().getSimpleName() + ": " + ex.getMessage());
+                    try {
+                        producer.abortTransaction();
+                    } catch (Exception abortEx) {
+                        System.err.println("[task8][WARN] abortTransaction failed: " + abortEx.getMessage());
+                    }
+
+                    if (ex.getMessage() != null && ex.getMessage().contains("Intentional crash")) {
+                        System.exit(2);
                     }
                 }
-
-                Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
-                for (TopicPartition tp : records.partitions()) {
-                    List<ConsumerRecord<String, String>> tpRecords = records.records(tp);
-                    long lastOffset = tpRecords.get(tpRecords.size() - 1).offset();
-                    offsets.put(tp, new OffsetAndMetadata(lastOffset + 1));
-                }
-
-                producer.sendOffsetsToTransaction(offsets, consumer.groupMetadata());
-                producer.commitTransaction();
-
-                System.out.printf("[task8] committed tx: records=%d ok=%d bad=%d partitions=%d%n",
-                        records.count(), okCount, badCount, records.partitions().size());
-
-            } catch (ProducerFencedException fenced) {
-                System.err.println("[task8][FATAL] Producer fenced (duplicate transactional.id). Stop.");
-                running.set(false);
-            } catch (Exception ex) {
-                System.err.println("[task8][WARN] abortTransaction due to error: " + ex.getClass().getSimpleName() + ": " + ex.getMessage());
-                try {
-                    producer.abortTransaction();
-                } catch (Exception abortEx) {
-                    System.err.println("[task8][WARN] abortTransaction failed: " + abortEx.getMessage());
-                }
             }
+        } catch (WakeupException we) {
+            // expected on shutdown
+        } finally {
+            close();
         }
-
-        close();
     }
 
     public void stop() {
